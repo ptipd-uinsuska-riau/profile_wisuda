@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProfileExport;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProfileController extends Controller
 {
@@ -13,6 +15,14 @@ class ProfileController extends Controller
     public function index()
     {
         return view('pages.profile.index');
+    }
+
+     /**
+     * Display a listing of the resource.
+     */
+    public function export()
+    {
+        return Excel::download(new ProfileExport, 'profile_wisuda.xlsx');
     }
 
     /**

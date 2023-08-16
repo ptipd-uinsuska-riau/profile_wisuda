@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\ColorSchemeController;
 
@@ -19,6 +20,13 @@ use App\Http\Controllers\ColorSchemeController;
 
 Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
 Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+});
+
+Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
+
 
 Route::controller(AuthController::class)->middleware('loggedin')->group(function () {
     Route::get('login', 'loginView')->name('login.index');
