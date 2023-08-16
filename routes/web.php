@@ -26,7 +26,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
-
+Route::post('profile/import', [ProfileController::class, 'import'])->name('profile.import');
+Route::get('profile/turncate', [ProfileController::class, 'turncate'])->name('profile.turncate');
 
 Route::controller(AuthController::class)->middleware('loggedin')->group(function () {
     Route::get('login', 'loginView')->name('login.index');

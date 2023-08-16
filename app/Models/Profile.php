@@ -9,7 +9,7 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $filable = [
+    protected $fillable = [
         'nim',
         'nama',
         'ayah',
@@ -27,6 +27,12 @@ class Profile extends Model
         'keterangan',
         'semester'
     ];
+
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
 
     // kalau foto kosong, kasih default value dari resource foto
     public function getFoto()

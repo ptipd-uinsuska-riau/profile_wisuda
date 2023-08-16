@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProfileExport;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Exports\ProfileExport;
+use App\Imports\ProfileImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProfileController extends Controller
@@ -17,12 +18,30 @@ class ProfileController extends Controller
         return view('pages.profile.index');
     }
 
-     /**
-     * Display a listing of the resource.
+    /**
+     * Export a listing of the resource.
      */
+
     public function export()
     {
         return Excel::download(new ProfileExport, 'profile_wisuda.xlsx');
+    }
+
+    /**
+     * Import a listing of the resource.
+     */
+
+    public function import(Request $request)
+    {
+        Excel::import(new ProfileImport, request()->file('file'));
+        // dd($request->all());
+        return to_route('profile.index');
+    }
+
+    public function turncate()
+    {
+        Profile::truncate();
+        return to_route('profile.index');
     }
 
     /**
