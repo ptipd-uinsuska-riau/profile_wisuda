@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nim');
             $table->string('nama');
+            $table->string('jk');
             $table->string('ayah');
             $table->string('prediket');
             $table->string('foto');
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->string('tahun_akademik');
             $table->string('keterangan');
             $table->string('semester');
+            $table->tinyInteger('hadir')->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class ProfileSeeder extends Seeder
         Profile::insert([
             'nim' => '11910123197',
             'nama' => 'ANGGI MAHARANI AGUSTINA',
+            'jk' => 'P',
             'ayah' => 'RAMADHAN HUTASUHUT',
             'prediket' => 'CUM LAUDE',
             'foto' => 'https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI',

@@ -50,7 +50,20 @@ class ProfileController extends Controller
 
     public function getData()
     {
+         // limit 20 data
+        $data = Profile::where('hadir', '1')->limit(11)->get();
 
+        //count jumlah data dari $data
+        $count = count($data);
+        $page = $count / 10;
+        $last_page = ceil($page);
+
+        $format = [
+            'last_page' => $last_page,
+            'data' => $data,
+        ];
+
+        return response()->json($format);
     }
 
     public function create()
@@ -85,9 +98,25 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, string $id)
     {
-        //
+        if ($request->status == 1) {
+            Profile::where('id', '!=', $request->id)->update([
+                'status' => 0
+            ]);
+
+            Profile::where('id', $request->id)->update([
+                'status' => 1
+            ]);
+        } else {
+            Profile::where('id', $request->id)->update([
+                'status' => 0
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 
     /**

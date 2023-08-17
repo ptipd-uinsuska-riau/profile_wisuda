@@ -12,6 +12,7 @@ class Profile extends Model
     protected $fillable = [
         'nim',
         'nama',
+        'jk', // 'L' or 'P
         'ayah',
         'prediket',
         'foto',
@@ -25,14 +26,11 @@ class Profile extends Model
         'periode',
         'tahun_akademik',
         'keterangan',
-        'semester'
+        'semester',
+        'hadir',
+        'status'
     ];
 
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    // ];
 
     // kalau foto kosong, kasih default value dari resource foto
     public function getFoto()

@@ -16,7 +16,7 @@ class SideMenu
                 'params' => [
                     'layout' => 'top-menu'
                 ],
-                'title' => 'Prorile'
+                'title' => 'Profile'
             ],
         ];
 
