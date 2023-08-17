@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Events\StatusUpdated;
 use App\Exports\ProfileExport;
 use App\Imports\ProfileImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Broadcast;
 
 class ProfileController extends Controller
 {
@@ -99,25 +101,36 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        if ($request->status == 1) {
-            Profile::where('id', '!=', $request->id)->update([
-                'status' => 0
-            ]);
-
-            Profile::where('id', $request->id)->update([
-                'status' => 1
-            ]);
-        } else {
-            Profile::where('id', $request->id)->update([
-                'status' => 0
-            ]);
-        }
-
-        return response()->json([
-            'message' => 'success'
+{
+    if ($request->status == 1) {
+        Profile::where('id', '!=', $request->id)->update([
+            'status' => 0
         ]);
+
+        Profile::where('id', $request->id)->update([
+            'status' => 1
+        ]);
+
+        $updatedStatus = 1; // Set the updated status here
+    } else {
+        Profile::where('id', $request->id)->update([
+            'status' => 0
+        ]);
+
+        $updatedStatus = 0; // Set the updated status here
     }
+
+    Broadcast::channel('status-update', function () {
+        return true;
+    });
+
+    event(new StatusUpdated($updatedStatus));
+
+    return response()->json([
+        'message' => 'success'
+    ]);
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -2,6 +2,7 @@
 
 @section('subhead')
 <title>Profile | Wisuda</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('subcontent')
@@ -100,6 +101,12 @@
 @endsection
 
 @once
+    @push('scripts')
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    @endpush
+@endonce
+
+@once
 @push('vendors')
 @vite('resources/js/vendor/tabulator/index.js')
 @vite('resources/js/vendor/lucide/index.js')
@@ -109,6 +116,7 @@
 @once
 @push('scripts')
 @vite('resources/js/pages/profile/index.js')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endpush
 @endonce
 

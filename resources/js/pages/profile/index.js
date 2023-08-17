@@ -1,10 +1,8 @@
 (function () {
     "use strict";
-
-    // const imageAssets = import.meta.glob(
-    //     "/resources/images/fakers/*.{jpg,jpeg,png,svg}",
-    //     { eager: true }
-    // );
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
 
     // Tabulator
     if ($("#tabulator").length) {
@@ -158,18 +156,30 @@
                     vertAlign: "middle",
                     print: false,
                     download: false,
-                    formatter() {
-                        let a =
-                            $(`<div class="flex items-center lg:justify-center">
-                        <a class="flex items-center mr-3 edit" href="javascript:;">
-                            <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Status
-                        </a>
-                        </div>`);
+                    formatter(cell, formatterParams, onRendered) {
+                        let id = cell.getData().id; // Assuming you have an "id" field in your data
+                        let status = cell.getData().status; // Assuming you have a "status" field in your data
+
+                        let a = $(`
+            <div class="flex items-center lg:justify-center">
+                <a class="flex items-center mr-3 edit" href="javascript:;">
+                    <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Status
+                </a>
+            </div>`);
+
+                        // Check status and add class for styling
+                        if (status === 1) {
+                            $(a).find(".edit").addClass("text-green-500"); // Assuming you have Tailwind CSS classes for text color
+                        } else {
+                            $(a).find(".edit").addClass("text-primary"); // Assuming you have Tailwind CSS classes for text color
+                        }
+
                         $(a)
                             .find(".edit")
                             .on("click", function () {
-                                alert("EDIT");
+                                updateStatus(id, status);
                             });
+
                         return a[0];
                     },
                 },
@@ -198,7 +208,6 @@
             });
         });
 
-
         function formatDate(dateTimeString) {
             const options = {
                 day: "numeric",
@@ -218,5 +227,64 @@
 
             return parts.join(" ");
         }
+
+        function updateStatus(id, currentStatus) {
+            let newStatus = 1 - currentStatus; // Toggle the status
+
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
+
+            const headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("X-CSRF-TOKEN", csrfToken);
+
+            fetch(`/profile/update/${id}`, {
+                method: "PUT",
+                headers: headers,
+                body: JSON.stringify({
+                    id: id,
+                    status: newStatus,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.message);
+
+                    // Update the status in the Tabulator data
+                    const newData = tabulator.getData().map((row) => {
+                        if (row.id === id) {
+                            return {
+                                ...row,
+                                status: newStatus,
+                            };
+                        }
+                        return row;
+                    });
+                    tabulator.setData(newData);
+
+                    // Redraw the table to reflect the changes
+                    tabulator.redraw();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+
+        // Inisialisasi Pusher
+        const pusher = new Pusher("f3086aa4b83d0f915692", {
+            cluster: "ap1",
+            encrypted: true,
+        });
+
+        // Berlangganan ke channel 'status-update'
+        const channel = pusher.subscribe("status-update");
+        channel.bind("App\\Events\\StatusUpdated", function (data) {
+            // Lakukan pembaruan status pada tabel menggunakan Tabulator API
+            const updatedStatus = data.updatedStatus;
+            // ... (Lakukan pembaruan status di tabel, bisa dengan memanggil fungsi updateStatus)
+        });
     }
 })();
+

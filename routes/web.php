@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/data', [ProfileController::class, 'getData'])->name('profile.data');
     Route::get('profile/turncate', [ProfileController::class, 'turncate'])->name('profile.turncate');
-    Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
