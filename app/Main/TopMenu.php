@@ -18,6 +18,14 @@ class TopMenu
                 ],
                 'title' => 'Profile'
             ],
+            'show' => [
+                'icon' => 'cast',
+                'route_name' => 'profile.show',
+                'params' => [
+                    'layout' => 'top-menu'
+                ],
+                'title' => 'Cast'
+            ]
         ];
     }
 }

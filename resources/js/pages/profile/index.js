@@ -229,8 +229,6 @@
         }
 
         function updateStatus(id, currentStatus) {
-            let newStatus = 1 - currentStatus; // Toggle the status
-
             const csrfToken = document
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content");
@@ -244,7 +242,7 @@
                 headers: headers,
                 body: JSON.stringify({
                     id: id,
-                    status: newStatus,
+                    status: currentStatus === 1 ? 0 : 1, // Toggle the status
                 }),
             })
                 .then((response) => response.json())
@@ -256,12 +254,38 @@
                         if (row.id === id) {
                             return {
                                 ...row,
-                                status: newStatus,
+                                status: currentStatus === 1 ? 0 : 1,
                             };
                         }
                         return row;
                     });
                     tabulator.setData(newData);
+
+                    // Get all rows
+                    const allRows = tabulator.getRows();
+
+                    // Loop through rows and update cell's color based on the updated status
+                    allRows.forEach((row) => {
+                        const rowData = row.getData();
+                        const cell = row.getCell("actions");
+
+                        // Update the class based on the updated status
+                        if (rowData.status === 1) {
+                            cell.getElement()
+                                .querySelector(".edit")
+                                .classList.add("text-green-500");
+                            cell.getElement()
+                                .querySelector(".edit")
+                                .classList.remove("text-primary");
+                        } else {
+                            cell.getElement()
+                                .querySelector(".edit")
+                                .classList.remove("text-green-500");
+                            cell.getElement()
+                                .querySelector(".edit")
+                                .classList.add("text-primary");
+                        }
+                    });
 
                     // Redraw the table to reflect the changes
                     tabulator.redraw();
@@ -270,6 +294,11 @@
                     console.error(error);
                 });
         }
+
+
+
+
+
 
 
         // Inisialisasi Pusher
