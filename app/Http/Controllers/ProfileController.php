@@ -89,6 +89,15 @@ class ProfileController extends Controller
         return view('pages.profile.show', compact('profile'));
     }
 
+    public function showData()
+    {
+        // ambil data profile where status = 1
+        $data = Profile::where('status', '1')->get();
+
+        //return
+        
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

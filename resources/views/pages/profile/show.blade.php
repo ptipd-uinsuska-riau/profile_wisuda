@@ -10,16 +10,20 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Sales Report -->
             <div class="col-span-12 row-start-4 mt-6 md:col-span-6 lg:col-span-4 lg:row-start-3 xl:col-span-3 xl:row-start-auto xl:mt-8">
-                <div class="flex items-center h-10 intro-y">
-                    <h2 class="mr-5 text-lg font-medium truncate"></h2>
-                    <a class="ml-auto truncate text-primary" href=""> </a>
+                <div class="flex items-center h-15 intro-y">
+                    <h2 class="mr-5 text-lg font-medium truncate"> </h2>
+                    {{-- <div class="ml-auto truncate text-primary" href=""> --}}
+                        <img class="ml-auto max-w-[30%]" height="10%" src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-UIN-Suska-Riau-Original-PNG.png.webp"> </img>
+
+                    {{-- </div> --}}
                 </div>
                 <div class="mt-5 intro-y before:hidden xl:before:block">
-                    <div class="p-5 box">
-                        <div class="mt-3">
-                            <x-report-donut-chart height="h-[196px]" />
+                    <div class="p-5 box h-auto">
+                        <div class="mt-1">
+                            <img src="https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI" alt="">
+                            {{-- <x-report-donut-chart height="h-[300px]" /> --}}
                         </div>
-                        <div class="mx-auto mt-8 w-52 sm:w-auto">
+                        {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
                             <div class="flex items-center">
                                 <div class="w-2 h-2 mr-3 rounded-full bg-primary"></div>
                                 <span class="truncate">17 - 30 Years old</span>
@@ -35,7 +39,7 @@
                                 <span class="truncate">&gt;= 50 Years old</span>
                                 <span class="ml-auto font-medium">10%</span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -43,8 +47,9 @@
 
             <!-- BEGIN: General Report -->
             <div class="col-span-12 mt-8 xl:col-span-9">
-                <div class="flex items-center h-10 intro-y">
-                    <h2 class="mr-5 text-lg font-medium truncate uppercase">Sidang Senat Terbuka <br>Univeristas Islam Negeri Sultan Syarif Kasim Riau </h2>
+                <div class="flex items-center h-15 intro-y">
+                    <h2 class="mr-5 text-4xl mt-4 mb-3 font-medium truncate uppercase text-primary">Sidang Senat Terbuka <br>Univeristas Islam Negeri Sultan Syarif Kasim Riau </h2>
+
                     <a class="ml-auto truncate text-primary" href="">  </a>
                 </div>
                 <div class="mt-5 intro-y">
@@ -83,22 +88,22 @@
                             <x-base.tab.group>
                                 <x-base.tab.panels class="px-5 pb-5">
                                     <x-base.tab.panel class="grid grid-cols-12 gap-y-8 gap-x-10" id="weekly-report" selected>
-                                        <div class="col-span-12">
+
+                                        <div class="col-span-4">
                                             <div class="text-slate-500">IPK</div>
                                             <div class="mt-1.5 flex items-center">
-                                                <div class="text-base">3.75</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-span-4">
-                                            <div class="text-slate-500">Prediket Kelulusan</div>
-                                            <div class="mt-1.5 flex items-center">
-                                                <div class="text-base">Cum laude</div>
+                                               <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary"> 3.75 </span>
+
+                                               </div>
+
                                             </div>
                                         </div>
                                         <div class="col-span-6">
-                                            <div class="text-slate-500">Semester</div>
+                                            <div class="text-slate-500">Prediket Kelulusan</div>
                                             <div class="mt-1.5 flex items-center">
-                                                <div class="text-base">7</div>
+                                                 <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary"> CUMLAUDE</span>
+
+                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-span-12">
@@ -119,8 +124,26 @@
                         </div>
                     </div>
                 </div>
+
+                 <div class="mt-2 intro-y">
+                    <div class="grid grid-cols-12 box">
+                        <div class="flex flex-col justify-center col-span-12 px-8 py-5">
+                            {{-- <x-base.lucide class="w-10 h-10 text-pending" icon="PieChart" /> --}}
+                            <div class="flex items-center justify-start mt-2 text-slate-600 dark:text-slate-300">
+                                Judul Penelitian
+                            </div>
+                            <div class="flex items-center justify-start mt-2">
+                                <div class="relative ml-0.5 text-xl font-medium">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, quas quaerat? Consequuntur suscipit inventore maiores repellat ea, exercitationem ipsum dolores temporibus quidem est excepturi pariatur? Error sapiente doloremque distinctio eveniet.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- END: General Report -->
+
         </div>
     </div>
 </div>

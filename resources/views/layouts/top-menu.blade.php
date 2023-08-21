@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="-mx-3 bg-black/[0.15] py-5 px-3 dark:bg-transparent sm:-mx-8 sm:px-8 md:py-0">
-        <x-dark-mode-switcher />
-        <x-main-color-switcher />
+        {{-- <x-dark-mode-switcher />
+        <x-main-color-switcher /> --}}
         <x-mobile-menu />
         <!-- BEGIN: Top Bar -->
         <div
@@ -267,7 +267,7 @@
         <!-- BEGIN: Top Menu -->
         <nav @class([
             'top-nav z-50 relative -mt-[3px] hidden md:block',
-        
+
             // Animation
             'translate-y-[50px] opacity-0 animate-[0.4s_ease-in-out_0.2s_intro-top-menu] animate-fill-mode-forwards',
         ])>
@@ -280,7 +280,7 @@
                                 $firstLevelActiveIndex == $menuKey
                                     ? 'top-menu top-menu--active'
                                     : 'top-menu',
-                            
+
                                 // Animation
                                 '[&:not(.top-menu--active)]:opacity-0 [&:not(.top-menu--active)]:translate-y-[50px] animate-[0.4s_ease-in-out_0.3s_intro-top-menu] animate-fill-mode-forwards animate-delay-' .
                                 (array_search($menuKey, array_keys($topMenu)) + 1) * 10,

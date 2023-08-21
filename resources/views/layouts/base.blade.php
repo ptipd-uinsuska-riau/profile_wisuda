@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<!--
-Template Name: Tinker - HTML Admin Dashboard Template
-Author: Left4code
-Website: http://www.left4code.com/
-Contact: muhammadrizki@left4code.com
-Purchase: https://themeforest.net/user/left4code/portfolio
-Renew Support: https://themeforest.net/user/left4code/portfolio
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <html
     class="{{ $darkMode ? 'dark' : '' }}{{ $colorScheme != 'default' ? ' ' . $colorScheme : '' }}"
     lang="{{ str_replace('_', '-', app()->getLocale()) }}"
@@ -30,15 +21,15 @@ License: You must have a valid license purchased only from themeforest(the above
     >
     <meta
         name="description"
-        content="Tinker admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities."
+        content="Profile wisudawan uin suska riau."
     >
     <meta
         name="keywords"
-        content="admin template, Tinker Admin Template, dashboard template, flat admin template, responsive admin template, web app"
+        content="sistem, profile, wisuda, uin, suska, riau"
     >
     <meta
         name="author"
-        content="LEFT4CODE"
+        content="@ernoriwandi"
     >
 
     @yield('head')

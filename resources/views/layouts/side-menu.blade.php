@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="-mx-3 bg-black/[0.15] py-5 px-3 dark:bg-transparent sm:-mx-8 sm:px-8 md:py-0">
-        <x-dark-mode-switcher />
-        <x-main-color-switcher />
+        {{-- <x-dark-mode-switcher />
+        <x-main-color-switcher /> --}}
         <x-mobile-menu />
         <div class="mt-[4.7rem] flex overflow-hidden md:mt-0">
             <!-- BEGIN: Side Menu -->
@@ -32,7 +32,7 @@
                         @if ($menu == 'divider')
                             <li @class([
                                 'side-nav__divider my-6',
-                            
+
                                 // Animation
                                 'opacity-0 animate-[0.4s_ease-in-out_0.1s_intro-divider] animate-fill-mode-forwards animate-delay-' .
                                 (array_search($menuKey, array_keys($sideMenu)) + 1) * 10,
@@ -45,7 +45,7 @@
                                         $firstLevelActiveIndex == $menuKey
                                             ? 'side-menu side-menu--active'
                                             : 'side-menu',
-                                    
+
                                         // Animation
                                         '[&:not(.side-menu--active)]:opacity-0 [&:not(.side-menu--active)]:translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-' .
                                         (array_search($menuKey, array_keys($sideMenu)) + 1) * 10,
@@ -74,7 +74,7 @@
                                                         $secondLevelActiveIndex == $subMenuKey
                                                             ? 'side-menu side-menu--active'
                                                             : 'side-menu',
-                                                    
+
                                                         // Animation
                                                         '[&:not(.side-menu--active)]:opacity-0 [&:not(.side-menu--active)]:translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-' .
                                                         (array_search($subMenuKey, array_keys($menu['sub_menu'])) + 1) * 10,
@@ -104,7 +104,7 @@
                                                                         $thirdLevelActiveIndex == $lastSubMenuKey
                                                                             ? 'side-menu side-menu--active'
                                                                             : 'side-menu',
-                                                                    
+
                                                                         // Animation
                                                                         '[&:not(.side-menu--active)]:opacity-0 [&:not(.side-menu--active)]:translate-x-[50px] animate-[0.4s_ease-in-out_0.1s_intro-menu] animate-fill-mode-forwards animate-delay-' .
                                                                         (array_search($lastSubMenuKey, array_keys($subMenu['sub_menu'])) + 1) * 10,
