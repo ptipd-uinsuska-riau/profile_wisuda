@@ -91,11 +91,14 @@ class ProfileController extends Controller
 
     public function showData()
     {
-        // ambil data profile where status = 1
-        $data = Profile::where('status', '1')->get();
+        $data = Profile::where('status', 1)->first();
+        return response()->json($data);
+    }
 
-        //return
-        
+    public function getRealtimeData()
+    {
+        $data = Profile::where('hadir', 1)->get();
+        return response()->json($data);
     }
 
     /**
@@ -110,35 +113,37 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    if ($request->status == 1) {
-        Profile::where('id', '!=', $request->id)->update([
-            'status' => 0
-        ]);
+    {
+        if ($request->status == 1) {
+            Profile::where('id', '!=', $request->id)->update([
+                'status' => 0
+            ]);
 
-        Profile::where('id', $request->id)->update([
-            'status' => 1
-        ]);
+            Profile::where('id', $request->id)->update([
+                'status' => 1
+            ]);
 
-        $updatedStatus = 1; // Set the updated status here
-    } else {
-        Profile::where('id', $request->id)->update([
-            'status' => 0
-        ]);
+            $updatedStatus = 1; // Set the updated status here
+        } else {
+            Profile::where('id', $request->id)->update([
+                'status' => 0
+            ]);
 
-        $updatedStatus = 0; // Set the updated status here
+            $updatedStatus = 0; // Set the updated status here
+        }
+
+        Broadcast::channel('status-update', function () {
+            return true;
+        });
+
+        Broadcast::event(new StatusUpdated($updatedStatus));
+
+        event(new StatusUpdated($updatedStatus));
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
-
-    Broadcast::channel('status-update', function () {
-        return true;
-    });
-
-    event(new StatusUpdated($updatedStatus));
-
-    return response()->json([
-        'message' => 'success'
-    ]);
-}
 
 
     /**

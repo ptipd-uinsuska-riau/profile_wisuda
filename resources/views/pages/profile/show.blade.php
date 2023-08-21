@@ -13,14 +13,14 @@
                 <div class="flex items-center h-15 intro-y">
                     <h2 class="mr-5 text-lg font-medium truncate"> </h2>
                     {{-- <div class="ml-auto truncate text-primary" href=""> --}}
-                        <img class="ml-auto max-w-[30%]" height="10%" src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-UIN-Suska-Riau-Original-PNG.png.webp"> </img>
+                    <img class="ml-auto max-w-[30%]" height="10%" src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-UIN-Suska-Riau-Original-PNG.png.webp"> </img>
 
                     {{-- </div> --}}
                 </div>
                 <div class="mt-5 intro-y before:hidden xl:before:block">
                     <div class="p-5 box h-auto">
                         <div class="mt-1">
-                            <img src="https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI" alt="">
+                            <img id="avatar" src="https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI" alt="">
                             {{-- <x-report-donut-chart height="h-[300px]" /> --}}
                         </div>
                         {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
@@ -50,7 +50,7 @@
                 <div class="flex items-center h-15 intro-y">
                     <h2 class="mr-5 text-4xl mt-4 mb-3 font-medium truncate uppercase text-primary">Sidang Senat Terbuka <br>Univeristas Islam Negeri Sultan Syarif Kasim Riau </h2>
 
-                    <a class="ml-auto truncate text-primary" href="">  </a>
+                    <a class="ml-auto truncate text-primary" href=""> </a>
                 </div>
                 <div class="mt-5 intro-y">
                     <div class="grid grid-cols-12 box">
@@ -60,11 +60,11 @@
                                 Nama
                             </div>
                             <div class="flex items-center justify-start mt-2">
-                                <div class="relative ml-0.5 text-2xl font-medium">
+                                <div class="relative ml-0.5 text-2xl font-medium" id="nama">
                                     ANGGI MAHARANI AGUSTINA
                                 </div>
                             </div>
-                            <div class="mt-1 mb-4 text-xs text-slate-500">
+                            <div class="mt-1 mb-4 text-xs text-slate-500" id="nim">
                                 11910123197
                             </div>
                             <hr>
@@ -72,7 +72,7 @@
                                 Nama Orang Tua/Wali
                             </div>
                             <div class="flex items-center justify-start mt-2">
-                                <div class="relative ml-0.5 text-xl font-medium">
+                                <div class="relative ml-0.5 text-xl font-medium" id="ayah">
                                     ANGGI MAHARANI AGUSTINA
                                 </div>
                             </div>
@@ -92,30 +92,30 @@
                                         <div class="col-span-4">
                                             <div class="text-slate-500">IPK</div>
                                             <div class="mt-1.5 flex items-center">
-                                               <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary"> 3.75 </span>
+                                                <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary" id="ipk"> 3.75 </span>
 
-                                               </div>
+                                                </div>
 
                                             </div>
                                         </div>
                                         <div class="col-span-6">
                                             <div class="text-slate-500">Prediket Kelulusan</div>
                                             <div class="mt-1.5 flex items-center">
-                                                 <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary"> CUMLAUDE</span>
+                                                <div class="transition duration-200 border shadow-sm inline-flex items-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed text-slate-500 dark:text-slate-300 [&amp;:hover:not(:disabled)]:bg-secondary/20 [&amp;:hover:not(:disabled)]:dark:bg-darkmode-100/10 relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300"><span class="mr-5 truncate text-4xl text-primary" id="prediket"> CUMLAUDE</span>
 
-                                                 </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-span-12">
                                             <div class="text-slate-500">Fakultas</div>
                                             <div class="mt-1.5 flex items-center">
-                                                <div class="text-base">TARBIYAH DAN KEGURUAN</div>
+                                                <div class="text-base" id="fakultas">TARBIYAH DAN KEGURUAN</div>
                                             </div>
                                         </div>
                                         <div class="col-span-12">
                                             <div class="text-slate-500">Program Studi</div>
                                             <div class="mt-1.5 flex items-center">
-                                                <div class="text-base">PENDIDIKAN AGAMA ISLAM</div>
+                                                <div class="text-base" id="prodi">PENDIDIKAN AGAMA ISLAM</div>
                                             </div>
                                         </div>
                                     </x-base.tab.panel>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                 <div class="mt-2 intro-y">
+                <div class="mt-2 intro-y">
                     <div class="grid grid-cols-12 box">
                         <div class="flex flex-col justify-center col-span-12 px-8 py-5">
                             {{-- <x-base.lucide class="w-10 h-10 text-pending" icon="PieChart" /> --}}
@@ -133,7 +133,7 @@
                                 Judul Penelitian
                             </div>
                             <div class="flex items-center justify-start mt-2">
-                                <div class="relative ml-0.5 text-xl font-medium">
+                                <div class="relative ml-0.5 text-xl font-medium" id="judul">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, quas quaerat? Consequuntur suscipit inventore maiores repellat ea, exercitationem ipsum dolores temporibus quidem est excepturi pariatur? Error sapiente doloremque distinctio eveniet.
                                 </div>
                             </div>
@@ -149,3 +149,60 @@
 </div>
 @endsection
 
+@once
+@push('scripts')
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+<script>
+    // Inisialisasi Pusher
+    const pusher = new Pusher("f3086aa4b83d0f915692", {
+        cluster: "ap1"
+        , encrypted: true
+    , });
+
+    fetch('/profile/show-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // Lanjutkan dengan manipulasi DOM atau tampilan sesuai data yang diterima
+
+            // Update student name
+            document.getElementById('nama').textContent = data.nama;
+
+            // Update student NIM
+            document.getElementById('nim').textContent = data.nim;
+
+            // Update student IPK
+            document.getElementById('ipk').textContent = data.ipk;
+
+            // Update Prediket Kelulusan
+            document.getElementById('prediket').textContent = data.prediket;
+
+            // Update Fakultas
+            document.getElementById('fakultas').textContent = data.fakultas;
+
+            // Update Program Studi
+            document.getElementById('prodi').textContent = data.prodi;
+
+            // Update the student's image
+            const avatarElement = document.getElementById('avatar');
+            avatarElement.src = data.foto;
+            avatarElement.alt = data.nama;
+
+            // Update Judul Penelitian
+            document.getElementById('judul').textContent = 'Judul Penelitian: ' + data.judul_penelitian;
+
+
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+</script>
+@endpush
+@endonce

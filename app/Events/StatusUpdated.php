@@ -12,25 +12,19 @@ use Illuminate\Queue\SerializesModels;
 
 class StatusUpdated
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    // use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
-    public function __construct()
+   use Dispatchable, SerializesModels;
+
+    public $updatedStatus;
+
+    public function __construct($updatedStatus)
     {
-        //
+        $this->updatedStatus = $updatedStatus;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        return new PrivateChannel('status-update');
     }
 }

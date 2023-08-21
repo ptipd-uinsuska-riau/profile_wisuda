@@ -289,17 +289,22 @@
 
                     // Redraw the table to reflect the changes
                     tabulator.redraw();
+
+                    // Mengirim pemberitahuan ke Pusher setelah berhasil memperbarui status
+                    const pusher = new Pusher("f3086aa4b83d0f915692", {
+                        cluster: "ap1",
+                        encrypted: true,
+                    });
+
+                    const channel = pusher.subscribe("status-update");
+                    channel.trigger("App\\Events\\StatusUpdated", {
+                        updatedStatus: currentStatus === 1 ? 0 : 1,
+                    });
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         }
-
-
-
-
-
-
 
         // Inisialisasi Pusher
         const pusher = new Pusher("f3086aa4b83d0f915692", {
@@ -314,6 +319,26 @@
             const updatedStatus = data.updatedStatus;
             // ... (Lakukan pembaruan status di tabel, bisa dengan memanggil fungsi updateStatus)
         });
+
+        function fetchRealtimeData() {
+            fetch("/profile/get-realtime-data")
+                .then((response) => response.json())
+                .then((data) => {
+                    // Update the Tabulator data and redraw the table
+                    tabulator.setData(data);
+                    tabulator.redraw();
+
+                    // Alternatively, you can update specific cells or rows based on the received data
+                    // Loop through rows and update cells or rows based on data
+                    // ...
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        // Fetch data every 5 seconds
+        // setInterval(fetchRealtimeData, 5000); // You can adjust the interval as needed
     }
 })();
 
