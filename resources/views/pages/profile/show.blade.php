@@ -151,58 +151,73 @@
 
 @once
 @push('scripts')
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="//js.pusher.com/3.1/pusher.min.js"></script>
 
 <script>
-    // Inisialisasi Pusher
-    const pusher = new Pusher("f3086aa4b83d0f915692", {
-        cluster: "ap1"
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('f3086aa4b83d0f915692', {
+        cluster: 'ap1'
         , encrypted: true
-    , });
+    });
 
-    fetch('/profile/show-data')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-            // Lanjutkan dengan manipulasi DOM atau tampilan sesuai data yang diterima
-
-            // Update student name
-            document.getElementById('nama').textContent = data.nama;
-
-            // Update student NIM
-            document.getElementById('nim').textContent = data.nim;
-
-            // Update student IPK
-            document.getElementById('ipk').textContent = data.ipk;
-
-            // Update Prediket Kelulusan
-            document.getElementById('prediket').textContent = data.prediket;
-
-            // Update Fakultas
-            document.getElementById('fakultas').textContent = data.fakultas;
-
-            // Update Program Studi
-            document.getElementById('prodi').textContent = data.prodi;
-
-            // Update the student's image
-            const avatarElement = document.getElementById('avatar');
-            avatarElement.src = data.foto;
-            avatarElement.alt = data.nama;
-
-            // Update Judul Penelitian
-            document.getElementById('judul').textContent = 'Judul Penelitian: ' + data.judul_penelitian;
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('status-liked');
 
 
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('App\\Events\\StatusLiked', function(data) {
+        const id = data.id; // Mengambil nilai ID dari data Pusher
+        console.log('Received data from Pusher:', data);
+        // Lanjutkan dengan pengambilan data dari server berdasarkan ID dan manipulasi DOM
+        fetch(`/profile/show-data/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+
+
+                // Lanjutkan dengan manipulasi DOM atau tampilan sesuai data yang diterima
+
+                // Update student name
+                document.getElementById('nama').textContent = data.nama;
+
+                // Update student NIM
+                document.getElementById('nim').textContent = data.nim;
+
+                // Update student IPK
+                document.getElementById('ipk').textContent = data.ipk;
+
+                // Update Prediket Kelulusan
+                document.getElementById('prediket').textContent = data.prediket;
+
+                // Update Fakultas
+                document.getElementById('fakultas').textContent = data.fakultas;
+
+                // Update Program Studi
+                document.getElementById('prodi').textContent = data.prodi;
+
+                // Update the student's image
+                const avatarElement = document.getElementById('avatar');
+                avatarElement.src = data.foto;
+                avatarElement.alt = data.nama;
+
+                // Update Judul Penelitian
+                document.getElementById('judul').textContent = 'Judul Penelitian: ' + data.judul_penelitian;
+
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
 
 </script>
+
 @endpush
 @endonce

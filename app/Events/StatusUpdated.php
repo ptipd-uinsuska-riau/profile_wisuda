@@ -10,11 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class StatusUpdated
+class StatusUpdated implements ShouldBroadcast
 {
-    // use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-   use Dispatchable, SerializesModels;
+//    use Dispatchable, SerializesModels;
 
     public $updatedStatus;
 
@@ -23,8 +23,8 @@ class StatusUpdated
         $this->updatedStatus = $updatedStatus;
     }
 
-    public function broadcastOn()
+    public function broadcastAs()
     {
-        return new PrivateChannel('status-update');
+        return new Channel('status-update');
     }
 }

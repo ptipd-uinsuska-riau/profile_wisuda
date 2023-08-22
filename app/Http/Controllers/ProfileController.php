@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Events\StatusLiked;
 use Illuminate\Http\Request;
 use App\Events\StatusUpdated;
 use App\Exports\ProfileExport;
@@ -89,10 +90,17 @@ class ProfileController extends Controller
         return view('pages.profile.show', compact('profile'));
     }
 
-    public function showData()
+    public function showData($id)
     {
-        $data = Profile::where('status', 1)->first();
-        return response()->json($data);
+        // $data = Profile::where('id', 1)->get();
+        // return response()->json($data);
+
+        $data = Profile::where('id', $id)->first(); // Menggunakan 'first()' untuk mendapatkan satu data
+        if ($data) {
+            return response()->json($data);
+        } else {
+            return response()->json(['error' => 'Data not found'], 404);
+        }
     }
 
     public function getRealtimeData()
@@ -123,26 +131,19 @@ class ProfileController extends Controller
                 'status' => 1
             ]);
 
-            $updatedStatus = 1; // Set the updated status here
         } else {
             Profile::where('id', $request->id)->update([
                 'status' => 0
             ]);
 
-            $updatedStatus = 0; // Set the updated status here
         }
 
-        Broadcast::channel('status-update', function () {
-            return true;
-        });
+        // $updatedStatus = $id;
 
-        Broadcast::event(new StatusUpdated($updatedStatus));
-
-        event(new StatusUpdated($updatedStatus));
-
-        return response()->json([
-            'message' => 'success'
-        ]);
+        event(new StatusLiked($id));
+        // return "Event has been sent!";
+        // event(new StatusUpdated($updatedStatus));
+        return response()->json(['message' => 'Data status updated']);
     }
 
 

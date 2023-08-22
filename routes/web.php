@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DarkModeController;
+use App\Http\Controllers\TestPusherController;
 use App\Http\Controllers\ColorSchemeController;
 
 /*
@@ -18,6 +19,16 @@ use App\Http\Controllers\ColorSchemeController;
 |
 */
 
+Route::get('/test', function () {
+    event(new App\Events\StatusLiked('Ari Padrian 1'));
+    return "Event has been sent!";
+});
+
+Route::get('/terima', function () {
+    return view('pages.a');
+});
+
+
 Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
 Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
 
@@ -27,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/turncate', [ProfileController::class, 'turncate'])->name('profile.turncate');
     Route::put('profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('profile/show', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('profile/show-data', [ProfileController::class, 'showData'])->name('profile.show-data');
+    Route::get('profile/show-data/{id}', [ProfileController::class, 'showData'])->name('profile.show-data');
     Route::get('profile/get-realtime-data', [ProfileController::class, 'getRealtimeData'])->name('profile.getRealtimeData');
 });
 
