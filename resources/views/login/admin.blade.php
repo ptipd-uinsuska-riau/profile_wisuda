@@ -46,10 +46,11 @@
                     <div
                         class="mx-auto my-auto w-full rounded-md bg-white px-5 py-8 shadow-md dark:bg-darkmode-600 sm:w-3/4 sm:px-8 lg:w-2/4 xl:ml-20 xl:w-auto xl:bg-transparent xl:p-0 xl:shadow-none">
                         <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
-                            Absensi Wisuda
+                            Sign In
                         </h2>
                         <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
-                            Silahkan login menggunakan akun iRaise untuk melanjutkan absensi
+                            A few more clicks to sign in to your account. Manage all your
+                            e-commerce accounts in one place
                         </div>
                         <div class="intro-x mt-8">
                             <form id="login-form">
@@ -57,8 +58,8 @@
                                     class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="email"
                                     type="text"
-                                    value="12150312429"
-                                    placeholder="NIM"
+                                    value="midone@left4code.com"
+                                    placeholder="Email"
                                 />
                                 <div
                                     class="login__input-error mt-2 text-danger"
@@ -68,7 +69,7 @@
                                     class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="password"
                                     type="password"
-                                    value="aditya15"
+                                    value="password"
                                     placeholder="Password"
                                 />
                                 <div
@@ -91,6 +92,7 @@
                                     Remember me
                                 </label>
                             </div>
+                            <a href="">Forgot Password?</a>
                         </div>
                         <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
                             <x-base.button
@@ -99,6 +101,12 @@
                                 variant="primary"
                             >
                                 Login
+                            </x-base.button>
+                            <x-base.button
+                                class="mt-3 w-full px-4 py-3 align-top xl:mt-0 xl:w-32"
+                                variant="outline-secondary"
+                            >
+                                Register
                             </x-base.button>
                         </div>
                         <div class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">
@@ -127,6 +135,6 @@
 
 @once
     @push('scripts')
-        @vite('resources/js/pages/login/index.js')
+        @vite('resources/js/pages/login/index-admin.js')
     @endpush
 @endonce

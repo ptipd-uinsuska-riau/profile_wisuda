@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DarkModeController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\TestPusherController;
 use App\Http\Controllers\ColorSchemeController;
 
@@ -42,12 +43,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/get-realtime-data', [ProfileController::class, 'getRealtimeData'])->name('profile.getRealtimeData');
 });
 
+// Route::get('login', [MahasiswaController::class, 'loginView'])->name('login.index');
+
 Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
 Route::post('profile/import', [ProfileController::class, 'import'])->name('profile.import');
 
+Route::get('/login', [MahasiswaController::class, 'loginView'])->name('login.index');
+Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check');
+Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout');
+Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
+
+
 Route::controller(AuthController::class)->middleware('loggedin')->group(function () {
-    Route::get('login', 'loginView')->name('login.index');
-    Route::post('login', 'login')->name('login.check');
+    Route::get('login-admin', 'loginView')->name('login-admin.index');
+    Route::post('login-admin', 'login')->name('login-admin.check');
 });
 
 Route::middleware('auth')->group(function () {

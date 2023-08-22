@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function loginView(): View
     {
-        return view('login.main', [
+        return view('login.admin', [
             'layout' => 'base'
         ]);
     }
