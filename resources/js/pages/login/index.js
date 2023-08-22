@@ -1,8 +1,6 @@
 (function () {
     ("use strict");
 
-    // const baseURL = "http://127.0.0.1:9008/client/auth/";
-    // panggil API_URL_CLIENT dari .env untuk baseURL
     const baseURL = "http://api1.iraise.uin-suska.ac.id:9008/client/auth/";
     // const baseURL = API_URL_CLIENT;
 
@@ -14,9 +12,6 @@
         // Post form
         let email = $("#email").val();
         let password = $("#password").val();
-
-        console.log(email);
-        console.log(password);
 
         // Loading state
         $("#btn-login").html(
@@ -32,26 +27,12 @@
             })
             .then((res) => {
                 if (res.data.status === 1) {
-                    // Jika login berhasil, panggil endpoint "/generate" untuk mengatur session
-                    fetch(`generate`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document
-                                .querySelector('meta[name="csrf-token"]')
-                                .getAttribute("content"),
-                        },
-                        // Kirimkan data pengguna ke endpoint "/generate"
-                        // body: JSON.stringify(res.data.data.data),
-                        body: JSON.stringify(res.data.data),
-                    })
-                        .then((response) => response.json())
-                        .then((sessionData) => {
-                            // Session telah di-generate di server, Anda dapat menindaklanjuti respons jika perlu
-                            // console.log(sessionData);
-                            // Redirect ke halaman "/beranda" atau tindakan lain yang sesuai
-                            window.location = "/mahasiswa-absen";
-                        });
+                    // Jika login berhasil, simpan data pada cookies
+                    Cookies.set("token", res.data.data.jwt.token);
+                    Cookies.set("id_pd", res.data.data.data.id_pd);
+                    Cookies.set("nm_pd", res.data.data.data.nm_pd);
+
+                    window.location = "/mahasiswa-absen";
                 } else {
                     // Jika login gagal, tampilkan pesan kesalahan dari server
                     $("#btn-login").html("Login");

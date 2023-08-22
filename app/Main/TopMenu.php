@@ -24,7 +24,15 @@ class TopMenu
                 'params' => [
                     'layout' => 'top-menu'
                 ],
-                'title' => 'Cast'
+                'title' => 'Display'
+            ],
+            'qr' => [
+                'icon' => 'camera',
+                'route_name' => 'qr.index',
+                'params' => [
+                    'layout' => 'top-menu'
+                ],
+                'title' => 'QR'
             ]
         ];
     }

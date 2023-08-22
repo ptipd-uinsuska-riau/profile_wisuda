@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\GenerateQrController;
 use App\Http\Controllers\TestPusherController;
 use App\Http\Controllers\ColorSchemeController;
 
@@ -41,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('profile/show-data/{id}', [ProfileController::class, 'showData'])->name('profile.show-data');
     Route::get('profile/get-realtime-data', [ProfileController::class, 'getRealtimeData'])->name('profile.getRealtimeData');
+
+    Route::get('qr', [GenerateQrController::class, 'index'])->name('qr.index');
 });
 
 // Route::get('login', [MahasiswaController::class, 'loginView'])->name('login.index');

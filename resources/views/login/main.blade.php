@@ -2,6 +2,7 @@
 
 @section('head')
     <title>Login - Absensi Wisuda</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 @endsection
 
 @section('content')
@@ -23,7 +24,7 @@
                             src="{{ Vite::asset('resources/images/logo.svg') }}"
                             alt="Midone Tailwind HTML Admin Template"
                         />
-                        <span class="ml-3 text-lg text-white"> Tinker </span>
+                        <span class="ml-3 text-lg text-white"> Absensi Wisuda </span>
                     </a>
                     <div class="my-auto">
                         <img
@@ -36,7 +37,7 @@
                             sign in to your account.
                         </div>
                         <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">
-                            Manage all your e-commerce accounts in one place
+                            Absensi Wisuda merupakan aplikasi yang digunakan untuk melakukan absensi wisuda secara online.
                         </div>
                     </div>
                 </div>

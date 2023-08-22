@@ -1140,6 +1140,11 @@
     "glob" "^8.1.0"
     "nopt" "^6.0.0"
 
+"js-cookie@^3.0.5":
+  "integrity" "sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw=="
+  "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-3.0.5.tgz"
+  "version" "3.0.5"
+
 "just-extend@^5.0.0":
   "integrity" "sha512-b+z6yF1d4EOyDgylzQo5IminlUmzSeqR1hs/bzjBNjuGras4FXq/6TrzjxfN0j+TmI0ltJzTNlqXUMCniciwKQ=="
   "resolved" "https://registry.npmjs.org/just-extend/-/just-extend-5.1.1.tgz"

@@ -25,9 +25,23 @@ class MahasiswaController extends Controller
     }
 
     public function absen() {
-        dd('absen');
-        // /mahasiswa-absen
-        // 11753101901
+        return view('pages.absen.index', [
+            'layout' => 'top-menu'
+        ]);
+    }
+
+    // proses absen dari scanqr
+    public function absenProses(Request $request) {
+        $data = $request->all();
+        $data['mahasiswa_id'] = Auth::user()->id;
+        $data['status'] = 'hadir';
+        $data['tanggal'] = date('Y-m-d');
+        $data['waktu'] = date('H:i:s');
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['updated_at'] = date('Y-m-d H:i:s');
+
+        Absen::create($data);
+        return redirect()->route('mahasiswa.absen')->withSuccess('Absen berhasil');
     }
 
     // Controller di sisi server (backend)
