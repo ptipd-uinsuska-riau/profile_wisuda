@@ -37,7 +37,7 @@
                                 08:00:20
                             </div>
                         </div>
-                        <a id="scanQRButton" class="flex items-center justify-center w-12 h-12 text-white bg-white rounded-full bg-opacity-20 hover:bg-opacity-30 dark:bg-darkmode-300" href="#">
+                        <a class="flex items-center justify-center w-12 h-12 text-white bg-white rounded-full bg-opacity-20 hover:bg-opacity-30 dark:bg-darkmode-300" href="{{ route('mahasiswa.scan') }}">
                             <x-base.lucide class="w-6 h-6" icon="Camera" />
                         </a>
                         <video id="cameraFeed" autoplay playsinline style="display: none;"></video>

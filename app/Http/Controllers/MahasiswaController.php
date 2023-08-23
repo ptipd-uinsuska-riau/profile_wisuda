@@ -30,6 +30,12 @@ class MahasiswaController extends Controller
         ]);
     }
 
+    public function scan() {
+        return view('pages.absen.scan', [
+            'layout' => 'top-menu'
+        ]);
+    }
+
     // proses absen dari scanqr
     public function absenProses(Request $request) {
         $data = $request->all();

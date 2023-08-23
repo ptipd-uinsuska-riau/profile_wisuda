@@ -192,35 +192,12 @@
                     {{ $fakers[0]['jobs'][0] }}
                 </div>
             </x-base.menu.header>
+
             <x-base.menu.divider class="bg-white/[0.08]" />
-            <x-base.menu.item class="hover:bg-white/5">
-                <x-base.lucide
-                    class="mr-2 h-4 w-4"
-                    icon="User"
-                /> Profile
-            </x-base.menu.item>
-            <x-base.menu.item class="hover:bg-white/5">
-                <x-base.lucide
-                    class="mr-2 h-4 w-4"
-                    icon="Edit"
-                /> Add Account
-            </x-base.menu.item>
-            <x-base.menu.item class="hover:bg-white/5">
-                <x-base.lucide
-                    class="mr-2 h-4 w-4"
-                    icon="Lock"
-                /> Reset Password
-            </x-base.menu.item>
-            <x-base.menu.item class="hover:bg-white/5">
-                <x-base.lucide
-                    class="mr-2 h-4 w-4"
-                    icon="HelpCircle"
-                /> Help
-            </x-base.menu.item>
-            <x-base.menu.divider class="bg-white/[0.08]" />
-            <x-base.menu.item href="{{ route('logout') }}" id="logout-link" class="hover:bg-white/5">
+            <x-base.menu.item href="{{ route('logout.admin') }}" id="logout-link" class="hover:bg-white/5">
                 <x-base.lucide class="mr-2 h-4 w-4" icon="ToggleRight" /> Logout
             </x-base.menu.item>
+
         </x-base.menu.items>
     </x-base.menu>
     <!-- END: Account Menu -->

@@ -1,14 +1,16 @@
-document.querySelector("#scanQRButton").addEventListener("click", async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-        });
+let scanner = new Instascan.Scanner({ video: document.getElementById('scanner') });
 
-        const videoElement = document.querySelector("#cameraFeed");
-        videoElement.srcObject = stream;
+scanner.addListener('scan', function(content) {
+    alert('Scanned content: ' + content);
+    scanner.stop(); // Stop scanning after successful scan
+});
 
-        // Lakukan sesuatu dengan stream, seperti menampilkan kamera di elemen video
-    } catch (error) {
-        console.error("Error accessing camera:", error);
+Instascan.Camera.getCameras().then(function(cameras) {
+    if (cameras.length > 0) {
+        scanner.start(cameras[0]); // Start scanning from the first available camera
+    } else {
+        console.error('No cameras found.');
     }
+}).catch(function(error) {
+    console.error('Error accessing cameras:', error);
 });

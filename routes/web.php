@@ -26,8 +26,9 @@ Route::get('/', function () {
 
 Route::get('/login', [MahasiswaController::class, 'loginView'])->name('login.index');
 Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check');
-Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout');
+Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout.admin');
 Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
+Route::get('/mahasiswa-scan',[MahasiswaController::class, 'scan'])->name('mahasiswa.scan');
 Route::get('/login-admin', [AuthController::class, 'loginView'])->name('login-admin.index');
 Route::post('/login-admin', [AuthController::class, 'login'])->name('login-admin.check');
 
