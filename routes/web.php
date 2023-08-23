@@ -29,6 +29,7 @@ Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check'
 Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout.admin');
 Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
 Route::get('/mahasiswa-scan',[MahasiswaController::class, 'scan'])->name('mahasiswa.scan');
+Route::post('/mahasiswa-submit',[MahasiswaController::class, 'absenProses'])->name('mahasiswa.submit');
 Route::get('/login-admin', [AuthController::class, 'loginView'])->name('login-admin.index');
 Route::post('/login-admin', [AuthController::class, 'login'])->name('login-admin.check');
 

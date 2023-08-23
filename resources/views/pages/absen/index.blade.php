@@ -18,6 +18,19 @@
                         <x-base.lucide class="w-4 h-4" icon="X" />
                     </x-base.alert.dismiss-button>
                 </x-base.alert>
+
+                {{-- tampilkan withSuccess jika selesai absen --}}
+                @if (session()->has('withSuccess'))
+                    <x-base.alert class="flex items-center mb-6 box dark:border-darkmode-600" variant="primary" dismissible>
+                        <span>
+                            {{ session()->get('withError') }}
+                        </span>
+                        <x-base.alert.dismiss-button class="text-white">
+                            <x-base.lucide class="w-4 h-4" icon="X" />
+                        </x-base.alert.dismiss-button>
+                    </x-base.alert>
+                @endif
+
             </div>
         </div>
     </div>
@@ -34,13 +47,12 @@
                                 </x-base.tippy>
                             </div>
                             <div class="relative mt-3.5 pl-0 text-2xl font-medium leading-5 text-white">
-                                08:00:20
+                                {{ $jam }}
                             </div>
                         </div>
                         <a class="flex items-center justify-center w-12 h-12 text-white bg-white rounded-full bg-opacity-20 hover:bg-opacity-30 dark:bg-darkmode-300" href="{{ route('mahasiswa.scan') }}">
                             <x-base.lucide class="w-6 h-6" icon="Camera" />
                         </a>
-                        <video id="cameraFeed" autoplay playsinline style="display: none;"></video>
                     </div>
                 </div>
                 <div class="intro-x xl:min-h-0">
@@ -58,7 +70,6 @@
                                     <div class="text-slate-500">Nama Mahasiswa</div>
                                     <div class="mt-1.5 flex items-center">
                                         <div class="text-lg" id="nm_pd">Erno Irwandi <small class="text-sm">11653101555</small></div>
-
                                     </div>
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
