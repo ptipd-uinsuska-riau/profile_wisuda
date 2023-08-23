@@ -20,19 +20,18 @@ use App\Http\Controllers\ColorSchemeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/test', function () {
-    event(new App\Events\StatusLiked('Ari Padrian 1'));
-    return "Event has been sent!";
+Route::get('/', function () {
+    return to_route('login.index');
 });
 
-Route::get('/terima', function () {
-    return view('pages.a');
-});
+Route::get('/login', [MahasiswaController::class, 'loginView'])->name('login.index');
+Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check');
+Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout');
+Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
+Route::get('/login-admin', [AuthController::class, 'loginView'])->name('login-admin.index');
+Route::post('/login-admin', [AuthController::class, 'login'])->name('login-admin.check');
 
 
-Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
-Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -44,18 +43,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile/get-realtime-data', [ProfileController::class, 'getRealtimeData'])->name('profile.getRealtimeData');
 
     Route::get('qr', [GenerateQrController::class, 'index'])->name('qr.index');
+    Route::get('generate', [GenerateQrController::class, 'generate'])->name('qr.generate');
+
+
+    Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
+    Route::post('profile/import', [ProfileController::class, 'import'])->name('profile.import');
 });
 
 // Route::get('login', [MahasiswaController::class, 'loginView'])->name('login.index');
 
-Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
-Route::post('profile/import', [ProfileController::class, 'import'])->name('profile.import');
-
-Route::get('/', [MahasiswaController::class, 'loginView'])->name('login.index');
-Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check');
-Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout');
-Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
-Route::get('/login-admin', [AuthController::class, 'loginView'])->name('login-admin.index');
-Route::post('/login-admin', [AuthController::class, 'login'])->name('login-admin.check');
-
 // Route::get('/', [MahasiswaController::class, 'loginView'])->name('login.index');
+
+// Route::get('/test', function () {
+//     event(new App\Events\StatusLiked('Ari Padrian 1'));
+//     return "Event has been sent!";
+// });
+
+// Route::get('/terima', function () {
+//     return view('pages.a');
+// });

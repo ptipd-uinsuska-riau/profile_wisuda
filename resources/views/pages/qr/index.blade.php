@@ -2,6 +2,16 @@
 
 @section('subhead')
 <title>QR Manajer | Wisuda </title>
+<style>
+    .break-lines {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+
+</style>
+
 @endsection
 
 @section('subcontent')
@@ -19,8 +29,8 @@
                 </x-base.alert>
             </div>
             <div class="mb-3 intro-y mt-14 sm:gap-10">
-                <img src="{{ asset($qrCodeImagePath) }}" alt="QR Code">
-
+                {{-- {!! QrCode::size(1030)->generate('https://techvblogs.com/blog/generate-qr-code-laravel-8') !!} --}}
+                {!! $qrcode !!}
             </div>
         </div>
 
@@ -41,7 +51,7 @@
                                 Refresh Token QR
                             </div>
                         </div>
-                        <a class="flex items-center justify-center w-12 h-12 text-white bg-white rounded-full bg-opacity-20 hover:bg-opacity-30 dark:bg-darkmode-300" href="">
+                        <a class="flex items-center justify-center w-12 h-12 text-white bg-white rounded-full bg-opacity-20 hover:bg-opacity-30 dark:bg-darkmode-300" href="{{ route('qr.generate') }}">
                             <x-base.lucide class="w-6 h-6" icon="RefreshCw" />
                         </a>
                     </div>
@@ -58,17 +68,25 @@
                         <x-base.tab.panels class="px-5 pb-5">
                             <x-base.tab.panel class="grid grid-cols-12 gap-y-6" id="weekly-report" selected>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
+                                    <div class="text-slate-500">Token QR</div>
+                                    <div class="mt-1.5 flex items-center bg-orange-100 mb-5">
+                                        <div class="text-sm break-lines">{{ $token }}</div>
+                                    </div>
+
+
+
                                     <div class="text-slate-500">Dibuat Pada</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg">27 Desember 2020</div>
+                                        <div class="text-lg">{{ $tanggal }}</div>
                                     </div>
                                 </div>
-                                <x-base.button class="relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300" variant="outline-secondary">
-                                    <span class="mr-5 truncate"> Unduh QR Code </span>
-                                    <span class="absolute right-0 top-0 bottom-0 my-auto ml-auto mr-0.5 flex h-8 w-8 items-center justify-center">
-                                        <x-base.lucide class="w-4 h-4" icon="ArrowRight" />
-                                    </span>
-                                </x-base.button>
+                                    {{-- <x-base.button class="relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300" variant="outline-secondary">
+                                        <span class="mr-5 truncate"> Unduh QR Code </span>
+                                        <span class="absolute right-0 top-0 bottom-0 my-auto ml-auto mr-0.5 flex h-8 w-8 items-center justify-center">
+                                            <x-base.lucide class="w-4 h-4" icon="ArrowRight" />
+                                        </span>
+                                    </x-base.button> --}}
+
                             </x-base.tab.panel>
                         </x-base.tab.panels>
                     </x-base.tab.group>
@@ -78,4 +96,8 @@
     </div>
 </div>
 @endsection
+
+
+
+
 

@@ -23,7 +23,7 @@
                 password: password,
             })
             .then((res) => {
-                location.href = "/profile";
+                location.href = "/profile?layout=top-menu";
             })
             .catch((err) => {
                 $("#btn-login").html("Login");
