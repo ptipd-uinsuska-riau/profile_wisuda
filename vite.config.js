@@ -59,7 +59,6 @@ export default defineConfig({
                 "resources/js/pages/login/index.js",
                 "resources/js/pages/login/index-admin.js",
                 "resources/js/pages/mahasiswa/index.js",
-                "resources/js/pages/mahasiswa/kamera.js",
                 "resources/js/pages/profile/index.js",
 
                 // Layouts
