@@ -3,6 +3,7 @@
 @section('head')
 <title>Scan | Wisuda </title>
 <script type="text/javascript" src="/js/jsqrscanner.nocache.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 @endsection
 
 @section('content')
@@ -37,31 +38,14 @@
             </div>
 
             <div class="form-field form-field-memo">
-                <div class="form-field-caption-panel">
-                    <div class="gwt-Label form-field-caption">
-                        Scanned text
-                    </div>
-                </div>
-                {{-- <form action=""></form> --}}
                 <form action="{{ route('mahasiswa.submit') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="token" id="scannedTextMemo">
-                    <input type="hidden" name="id_pd" id="id_pd" value="11910123197">
+                    <input type="text" name="token" id="scannedTextMemo">
+                    <input type="text" name="id_pd" id="id_pd" value="">
+
+                    <button type="submit">submit</button>
                 </form>
-
-
             </div>
-            {{-- <div class="form-field form-field-memo">
-                <div class="form-field-caption-panel">
-                    <div class="gwt-Label form-field-caption">
-                        Scanned text history
-                    </div>
-                </div>
-                <div class="FlexPanel form-field-input-panel">
-                    <textarea id="scannedTextMemoHist" class="textInput form-memo form-field-input textInput-readonly" value="" rows="6" readonly="">  </textarea>
-                </div>
-            </div> --}}
-
 
             <div class="mt-10 text-white lg:mt-0">
                 <div class="intro-x mt-5 text-xl font-medium lg:text-3xl">
@@ -81,6 +65,12 @@
     </div>
 </div>
 @endsection
+@once
+@push('scripts')
+@vite('resources/js/pages/mahasiswa/index.js')
+@endpush
+@endonce
+
 <script>
     if (location.protocol != 'https:') {
         document.getElementById('secure-connection-message').style = 'display: block';
@@ -158,42 +148,19 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Ambil referensi input token
-        var tokenInput = $('#scannedTextMemo');
+    document.addEventListener('DOMContentLoaded', function() {
+        const scannedTextMemo = document.getElementById('scannedTextMemo');
+        const autoSubmitForm = document.getElementById('autoSubmitForm');
 
-        // Fungsi untuk mengirimkan formulir menggunakan Ajax
-        function submitForm() {
-            $.ajax({
-                url: "{{ route('mahasiswa.submit') }}"
-                , type: "POST"
-                , data: {
-                    '_token': $('input[name=_token]').val()
-                    , 'token': tokenInput.val()
-                    , 'id_pd': $('#id_pd').val()
-                }
-                , success: function(response) {
-                    // Tanggapan sukses dari server, Anda dapat menambahkan logika sesuai kebutuhan
-                    console.log("Formulir berhasil dikirim!");
-                }
-                , error: function(xhr) {
-                    // Tanggapan error dari server, Anda dapat menambahkan logika penanganan error
-                    console.error("Terjadi kesalahan saat mengirim formulir.");
-                }
-            });
-        }
-
-        // Tambahkan event listener untuk perubahan pada input token
-        tokenInput.on('change', function() {
-            // Cek apakah nilai input tidak kosong
-            if (tokenInput.val() !== '') {
-                // Jika tidak kosong, kirimkan formulir secara otomatis
-                submitForm();
+        scannedTextMemo.addEventListener('input', function() {
+            if (scannedTextMemo.value !== '') {
+                autoSubmitForm.submit();
             }
         });
     });
 
 </script>
+
 
 
 

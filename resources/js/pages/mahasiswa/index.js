@@ -11,7 +11,16 @@ const config = {
 axios.get("http://api1.iraise.uin-suska.ac.id:9008/client/auth/me", config)
     .then((response) => {
         // Data yang diterima dari API
-        const userData = response.data;
+        const data = response.data.data;
+
+        // Mengubah nilai elemen-elemen HTML berdasarkan data userData
+        document.getElementById("nm_pd").textContent = data.nm_pd;
+        document.getElementById("id_pd").textContent = data.id_pd;
+        document.getElementById("email").textContent = data.email;
+        document.getElementById("no_hp").textContent = data.no_hp;
+
+
+        console.log(data);
     })
     .catch((error) => {
         // Tangani kesalahan jika ada

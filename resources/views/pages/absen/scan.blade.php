@@ -40,14 +40,14 @@
             </div>
         </div>
         <div class="row-element">
-            {{-- <div class="form-field form-field-memo">
+            <div class="form-field form-field-memo">
                 <div class="form-field-caption-panel">
                     <div class="gwt-Label form-field-caption">
                         Scanned text
                     </div>
                 </div>
                 <div class="FlexPanel form-field-input-panel">
-                    <textarea id="scannedTextMemo" class="textInput form-memo form-field-input textInput-readonly" rows="3" readonly="">            </textarea>
+                    <textarea id="scannedTextMemo" class="textInput form-memo form-field-input textInput-readonly" rows="3" readonly=""></textarea>
                 </div>
             </div>
             <div class="form-field form-field-memo">
@@ -59,7 +59,7 @@
                 <div class="FlexPanel form-field-input-panel">
                     <textarea id="scannedTextMemoHist" class="textInput form-memo form-field-input textInput-readonly" value="" rows="6" readonly="">  </textarea>
                 </div>
-            </div> --}}
+            </div>
         </div>
 
     </div>

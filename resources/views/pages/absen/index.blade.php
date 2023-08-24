@@ -69,8 +69,10 @@
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Nama Mahasiswa</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="nm_pd">Erno Irwandi <small class="text-sm">11653101555</small></div>
+                                        <div class="text-lg" id="nm_pd">Erno Irwandi</div>
                                     </div>
+                                    <div class="text-sm" id="id_pd">11653101555</div>
+
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Program Studi</div>
@@ -112,6 +114,5 @@
 @once
 @push('scripts')
 @vite('resources/js/pages/mahasiswa/index.js')
-@vite('resources/js/pages/mahasiswa/kamera.js')
 @endpush
 @endonce
