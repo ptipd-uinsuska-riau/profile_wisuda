@@ -1,7 +1,7 @@
 (function () {
     ("use strict");
 
-    const baseURL = "https://api1.iraise.uin-suska.ac.id:9008/client/auth/";
+    const baseURL = "http://api1.iraise.uin-suska.ac.id:9008/client/auth/";
     // const baseURL = API_URL_CLIENT;
 
     async function login() {
