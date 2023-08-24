@@ -8,7 +8,7 @@ const config = {
 };
 
 // Melakukan permintaan GET ke API menggunakan axios
-axios.get("http://api1.iraise.uin-suska.ac.id:9008/client/auth/me", config)
+axios.get("https://api1.iraise.uin-suska.ac.id:9008/client/auth/me", config)
     .then((response) => {
         // Data yang diterima dari API
         const data = response.data.data;
