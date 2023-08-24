@@ -33,13 +33,11 @@ Route::post('/mahasiswa-submit',[MahasiswaController::class, 'absenProses'])->na
 Route::get('/login-admin', [AuthController::class, 'loginView'])->name('login-admin.index');
 Route::post('/login-admin', [AuthController::class, 'login'])->name('login-admin.check');
 
-
-
 Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/data', [ProfileController::class, 'getData'])->name('profile.data');
     Route::get('profile/turncate', [ProfileController::class, 'turncate'])->name('profile.turncate');
-    Route::put('profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('profile/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('profile/show-data/{id}', [ProfileController::class, 'showData'])->name('profile.show-data');
     Route::get('profile/get-realtime-data', [ProfileController::class, 'getRealtimeData'])->name('profile.getRealtimeData');

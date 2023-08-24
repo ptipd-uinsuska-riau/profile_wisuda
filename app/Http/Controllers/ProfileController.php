@@ -18,7 +18,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.profile.index');
+        $data = Profile::where('hadir', '1')->simplePaginate(10);
+        return view('pages.profile.index',[
+            'data' => $data
+        ]);
     }
 
     /**
@@ -54,19 +57,19 @@ class ProfileController extends Controller
     public function getData()
     {
          // limit 20 data
-        $data = Profile::where('hadir', '1')->limit(11)->get();
+        $data = Profile::where('hadir', '1')->get();
 
         //count jumlah data dari $data
-        $count = count($data);
-        $page = $count / 10;
-        $last_page = ceil($page);
+        // $count = count($data);
+        // $page = $count / 10;
+        // $last_page = ceil($page);
 
-        $format = [
-            'last_page' => $last_page,
-            'data' => $data,
-        ];
+        // $format = [
+        //     'last_page' => $last_page,
+        //     'data' => $data,
+        // ];
 
-        return response()->json($format);
+        return response()->json($data);
     }
 
     public function create()
