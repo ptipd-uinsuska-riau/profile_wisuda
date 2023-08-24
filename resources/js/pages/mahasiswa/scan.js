@@ -14,14 +14,7 @@ axios.get("https://api1.iraise.uin-suska.ac.id:8009/client/auth/me", config)
         const data = response.data.data;
 
         // Mengubah nilai elemen-elemen HTML berdasarkan data userData
-        document.getElementById("nm_pd").textContent = data.nm_pd;
-        document.getElementById("id_pd").textContent = data.id_pd;
-        document.getElementById("email").textContent = data.email;
-        document.getElementById("no_hp").textContent = data.no_hp;
-
-        // Menambahkan nilai id_pd ke tautan tombol
-        const scanButton = document.getElementById("scanButton");
-        scanButton.href = `mahasiswa-scan`;
+        document.getElementById("id_pd").value = data.id_pd;
 
         console.log(data);
     })

@@ -8,6 +8,14 @@
 </head>
 <body>
 
+    @include('layouts.notif')
+    @once
+    @push('vendors')
+    @vite('resources/js/vendor/toastify/index.js')
+    @endpush
+    @endonce
+
+
     <div class="row-element-set row-element-set-QRScanner">
         <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
         <noscript>

@@ -10,13 +10,16 @@
 <div class="py-2">
     <div class="container">
         {{-- tampilkan withSuccess jika selesai absen --}}
-        @if (session()->has('withError'))
-        <div class="flex items-center mb-6 box dark:border-darkmode-600 text-red-500">
-            {{ session()->get('withError') }}
-        </div>
+        @isset($alert)
+        <x-base.alert class="flex items-center mb-6 box dark:border-darkmode-600" variant="danger" dismissible>
+            <span>
+                {{$alert}}
+            </span>
+            <x-base.alert.dismiss-button class="text-white">
+                <x-base.lucide class="w-4 h-4" icon="X" />
+            </x-base.alert.dismiss-button>
+        </x-base.alert>
         @endif
-
-
 
         <!-- BEGIN: Error Page -->
         <div class="error-page flex h-screen flex-col items-center justify-center text-center lg:flex-row lg:text-left">
@@ -37,19 +40,27 @@
                 {{-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti eum nobis est sequi inventore omnis ex laudantium accusantium eius consectetur? Ipsum consectetur vero accusantium voluptatum fuga officiis magni laboriosam esse!</p> --}}
             </div>
 
-            <div class="form-field form-field-memo">
-                <form action="{{ route('mahasiswa.submit') }}" method="POST">
+            <div class="mt-5">
+                <form action="{{ route('mahasiswa.submit') }}" method="POST" id="autoSubmitForm">
                     @csrf
-                    <input type="text" name="token" id="scannedTextMemo">
-                    <input type="text" name="id_pd" id="id_pd" value="">
+                    <div class="mt-3 w-full sm:mt-0 sm:ml-auto sm:w-auto md:ml-0">
+                        <div class="relative w-56 text-slate-500">
+                            <input type="text" name="token" id="scannedTextMemo" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 !box !box w-56 pr-10">
+                        </div>
+                    </div>
 
-                    <button type="submit">submit</button>
+                    <input type="text" name="id_pd" id="id_pd">
+                    {{-- hidden --}}
+
+                    <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left bg-white">
+                        <button type="submit" class="bg-gray-400 transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Absen</button>
+                    </div>
                 </form>
             </div>
 
             <div class="mt-10 text-white lg:mt-0">
                 <div class="intro-x mt-5 text-xl font-medium lg:text-3xl">
-                   Absen Wisuda
+                    Absen Wisuda
                 </div>
                 <div class="intro-x mt-3 text-lg">
                     Arahkan Kamera Ke QR Code yang disediakan panitia
@@ -65,16 +76,19 @@
     </div>
 </div>
 @endsection
+
 @once
 @push('scripts')
-@vite('resources/js/pages/mahasiswa/index.js')
+@vite('resources/js/pages/mahasiswa/scan.js')
 @endpush
 @endonce
+
 
 <script>
     if (location.protocol != 'https:') {
         document.getElementById('secure-connection-message').style = 'display: block';
     }
+
 </script>
 <script type="text/javascript">
     function onQRCodeScanned(scannedText) {
@@ -147,13 +161,14 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const scannedTextMemo = document.getElementById('scannedTextMemo');
         const autoSubmitForm = document.getElementById('autoSubmitForm');
 
         scannedTextMemo.addEventListener('input', function() {
-            if (scannedTextMemo.value !== '') {
+            if (scannedTextMemo.value.trim() !== '') { // Trim whitespace and check for non-empty value
                 autoSubmitForm.submit();
             }
         });
@@ -164,5 +179,5 @@
 
 
 
-<iframe id="jsqrscanner" tabindex="-1" style="position: absolute; width: 0px; height: 0px; border: none; left: -1000px; top: -1000px;"></iframe>
 
+<iframe id="jsqrscanner" tabindex="-1" style="position: absolute; width: 0px; height: 0px; border: none; left: -1000px; top: -1000px;"></iframe>

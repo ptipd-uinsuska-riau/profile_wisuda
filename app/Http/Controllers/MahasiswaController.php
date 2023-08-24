@@ -13,7 +13,7 @@ class MahasiswaController extends Controller
     public function loginView()
     {
         return view('login.main', [
-            'layout' => 'base'
+            'layout' => 'base',
         ]);
     }
 
@@ -27,34 +27,42 @@ class MahasiswaController extends Controller
         }
     }
 
-    public function absen() {
+    public function absen(Request $request) {
+        $alert = $request->input('alert');
+
         // get data asben by id_pd & created_at = now
-        $date_time = date('Y-m-d H:i:s');
+        $date_time = date('Y-m-d');
 
         //ambil id_pd dari cookies
         $id_pd = $_COOKIE['id_pd'];
+        // dd($id_pd);
 
-        $absen = Absen::where('id_pd', $id_pd)->where('created_at', $date_time)->first();
+        $absen = Absen::where('id_pd', $id_pd)->whereDate('created_at', $date_time)->first();
+
+        // dd($absen);
         //jika ada data absen, maka tampilkan jam absen
         if ($absen) {
             //tampilkan created_at dengan format waktu absen menjadi 08:00:00 dari created_at = 2021-09-01 08:00:00
             $jam = $absen->created_at = date('H:i:s', strtotime($absen->created_at));
             return view('pages.absen.index', [
                 'layout' => 'top-menu',
+                'alert' => $alert ? $alert : 'Selamat datang di aplikasi absensi wisuda, Silahkan lakukan scan barcode untuk merekam absensi.',
                 'jam' => $jam
             ]);
         } else {
             //jika tidak ada data absen, maka tampilkan jam = belum ada data
             return view('pages.absen.index', [
                 'layout' => 'top-menu',
+                'alert' => $alert ? $alert : 'Selamat datang di aplikasi absensi wisuda, Silahkan lakukan scan barcode untuk merekam absensi.',
                 'jam' => 'belum ada data'
             ]);
         }
     }
 
-    public function scan() {
-        return view('pages.absen.scan-2', [
-            'layout' => 'top-menu'
+    public function scan(Request $request) {
+        $alert = $request->input('alert');
+        return view('pages.absen.scan-2',[
+            'alert' => $alert ? $alert : null,
         ]);
     }
 
@@ -68,16 +76,24 @@ class MahasiswaController extends Controller
 
             //cocokkan data generate qr dengan data yang diinputkan
             if ($generateQr->name != $data['token']) {
-                return redirect()->route('mahasiswa.scan')->withError('Token tidak valid');
+                return redirect()->route('mahasiswa.scan', [
+                    'alert' => 'QR Tidak Valid'
+                ]);
             }
 
             //cek apakah sudah absen hari ini
-            $date_time = date('Y-m-d H:i:s');
-            $absen = Absen::where('id_pd', $data['id_pd'])->where('created_at', $date_time)->first();
-            if ($absen) {
-                return redirect()->route('mahasiswa.scan')->withError('Anda sudah absen hari ini');
-            }
+            $date_time = date('Y-m-d H:i:s'); //2023-08-24 18:49:54
+            $absen = Absen::where('id_pd', $data['id_pd'])
+            ->where('created_at', $date_time)
+            ->orderBy('id', 'desc')
+            ->first();
 
+            // dd($absen);
+            if ($absen) {
+                return redirect()->route('mahasiswa.scan', [
+                    'alert' => 'Anda sudah absen hari ini'
+                ]);
+            }
 
             //simpan data absen
             $absen = new Absen();
@@ -86,14 +102,24 @@ class MahasiswaController extends Controller
 
             //update kolom hadir tabel profile menjadi 1
             $profile = Profile::where('nim', $data['id_pd'])->first();
-            $profile->hadir = 1;
-            $profile->save();
+            if ($profile) {
+                $profile->hadir = 1;
+                $profile->save();
+            } else {
+                return redirect()->route('mahasiswa.absen', [
+                    'alert' => 'Anda tidak terdaftar sebagai wisudawan periode ini'
+                ]);
+            }
 
-            return redirect()->route('mahasiswa.absen')->withSuccess('Absen berhasil');
+            return redirect()->route('mahasiswa.absen', [
+                    'alert' => 'Berhasil absen, terima kasih'
+                ]);
         } catch (\Exception $e) {
             // Tangani error di sini, misalnya:
             // Log::error($e->getMessage());
-            return redirect()->route('mahasiswa.scan')->withError('Terjadi kesalahan saat menyimpan data');
+            return redirect()->route('mahasiswa.scan', [
+                    'alert' => $e->getMessage()
+                ]);
         }
     }
 
