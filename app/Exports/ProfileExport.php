@@ -3,12 +3,10 @@
 namespace App\Exports;
 
 use App\Models\Profile;
-use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ProfileExport implements FromCollection
 {
-     use Exportable;
     /**
     * @return \Illuminate\Support\Collection
     */

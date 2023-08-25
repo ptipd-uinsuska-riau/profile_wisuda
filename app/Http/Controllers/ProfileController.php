@@ -34,10 +34,7 @@ class ProfileController extends Controller
 
     public function export()
     {
-        Excel::download(new ProfileExport, 'profile_wisuda.xlsx');
-
-        return to_route('profile.index');
-
+        return Excel::download(new ProfileExport, 'template_profile_wisuda.xlsx', true, ['X-Vapor-Base64-Encode' => 'True']);
     }
 
     /**
