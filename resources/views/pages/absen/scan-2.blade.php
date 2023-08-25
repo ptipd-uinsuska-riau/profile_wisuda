@@ -4,6 +4,16 @@
 <title>Scan | Wisuda </title>
 <script type="text/javascript" src="/js/jsqrscanner.nocache.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<style>
+    video {
+        width: 100vw !important;
+        height: 100vh !important;
+        object-fit: cover !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -22,58 +32,46 @@
         @endif
 
         <!-- BEGIN: Error Page -->
-        <div class="error-page flex h-screen flex-col items-center justify-center text-center lg:flex-row lg:text-left">
-            <div class="bg-white rounded-md py-4 px-4 mr-10">
-                <noscript>
-                    <div class="row-element-set error_message">
-                        Browser web Anda harus mengaktifkan JavaScript agar aplikasi ini ditampilkan dengan benar.
-                    </div>
-                </noscript>
-                <div class="row-element-set error_message" id="secure-connection-message" style="display: none;" hidden="">
-                    Anda mungkin perlu menayangkan halaman ini melalui koneksi aman (https) untuk menjalankan Scanner dengan benar.
-                </div>
-
-                <div class="container max-h-max" id="scanner">
-                    <video class="qrPreviewVideo" autoplay="" tabindex="0" src="" playsinline="true"></video>
-                </div>
-
-                {{-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti eum nobis est sequi inventore omnis ex laudantium accusantium eius consectetur? Ipsum consectetur vero accusantium voluptatum fuga officiis magni laboriosam esse!</p> --}}
-            </div>
-
-            <div class="mt-5">
-                <form action="{{ route('mahasiswa.submit') }}" method="POST" id="autoSubmitForm">
-                    @csrf
-                    <div class="mt-3 w-full sm:mt-0 sm:ml-auto sm:w-auto md:ml-0">
-                        <div class="relative w-56 text-slate-500">
-                            <input type="text" name="token" id="scannedTextMemo" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 !box !box w-56 pr-10">
-                        </div>
-                    </div>
-
-                    <input type="text" name="id_pd" id="id_pd">
-                    {{-- hidden --}}
-
-                    <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left bg-white">
-                        <button type="submit" class="bg-gray-400 transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Absen</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="mt-10 text-white lg:mt-0">
-                <div class="intro-x mt-5 text-xl font-medium lg:text-3xl">
-                    Absen Wisuda
-                </div>
-                <div class="intro-x mt-3 text-lg">
-                    Arahkan Kamera Ke QR Code yang disediakan panitia
-                </div>
-                <a href="{{ route('mahasiswa.absen') }}">
-                    <x-base.button class="intro-x mt-10 border-white px-4 py-3 text-white dark:border-darkmode-400 dark:text-slate-200">
-                        Back to Home
-                    </x-base.button>
-                </a>
-            </div>
+        <div id="scanner">
+            <video class="qrPreviewVideo" autoplay="" tabindex="0" src="" playsinline="true"></video>
         </div>
-        <!-- END: Error Page -->
+
+        {{-- form --}}
+        <div class="mt-5">
+            <form action="{{ route('mahasiswa.submit') }}" method="POST" id="autoSubmitForm">
+                @csrf
+                <div class="mt-3 w-full sm:mt-0 sm:ml-auto sm:w-auto md:ml-0">
+                    <div class="relative w-56 text-slate-500">
+                        <input type="hidden" name="token" id="scannedTextMemo" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 !box !box w-56 pr-10">
+                    </div>
+                </div>
+
+                <input type="hidden" name="id_pd" id="id_pd">
+                {{-- hidden --}}
+
+                <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left bg-white hidden">
+                    <button type="submit" id="btn-absen" class="bg-gray-400 transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Absen</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="h-screen w-screen fixed top-0 left-0">
+            <div class="flex absolute bottom-0 left-0">
+                <div class="p-3 text-center text-white">
+                    <div class="mt-5 text-xl font-medium lg:text-3xl">Absen Wisuda</div>
+                    <div class="mt-3 text-lg">Arahkan Kamera Ke QR Code yang disediakan panitia</div>
+                    <a href="{{ route('mahasiswa.absen') }}">
+                        <x-base.button class="mt-10 border-white px-4 py-3 text-white dark:border-darkmode-400 dark:text-slate-200">
+                            Back to Home
+                        </x-base.button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
+    <!-- END: Error Page -->
+</div>
 </div>
 @endsection
 
@@ -93,8 +91,13 @@
 <script type="text/javascript">
     function onQRCodeScanned(scannedText) {
         var scannedTextMemo = document.getElementById("scannedTextMemo");
+
         if (scannedTextMemo) {
             scannedTextMemo.value = scannedText;
+            // kirim hasil scannedText ke ke endpoint /mahasiswa-submit
+            setTimeout(() => {
+                document.getElementById('autoSubmitForm').submit();
+            }, 500);
         }
         var scannedTextMemoHist = document.getElementById("scannedTextMemoHist");
         if (scannedTextMemoHist) {
@@ -156,6 +159,7 @@
             //append the jbScanner to an existing DOM element
             jbScanner.appendTo(scannerParentElement);
         }
+
     }
 
 </script>
@@ -175,9 +179,5 @@
     });
 
 </script>
-
-
-
-
 
 <iframe id="jsqrscanner" tabindex="-1" style="position: absolute; width: 0px; height: 0px; border: none; left: -1000px; top: -1000px;"></iframe>
