@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Events\StatusLiked;
+use App\Exports\AbsenExport;
 use Illuminate\Http\Request;
 use App\Events\StatusUpdated;
 use App\Exports\ProfileExport;
@@ -18,9 +19,12 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $fakultas = Profile::select('fakultas')->distinct()->get();
+
         $data = Profile::where('hadir', '1')->simplePaginate(10);
         return view('pages.profile.index',[
-            'data' => $data
+            'data' => $data,
+            'fakultas' => $fakultas
         ]);
     }
 
@@ -30,7 +34,10 @@ class ProfileController extends Controller
 
     public function export()
     {
-        return Excel::download(new ProfileExport, 'profile_wisuda.xlsx');
+        Excel::download(new ProfileExport, 'profile_wisuda.xlsx');
+
+        return to_route('profile.index');
+
     }
 
     /**
@@ -40,8 +47,13 @@ class ProfileController extends Controller
     public function import(Request $request)
     {
         Excel::import(new ProfileImport, request()->file('file'));
-        // dd($request->all());
         return to_route('profile.index');
+    }
+
+    public function absen(Request $request)
+    {
+        $fakultasFilter = $request->filter_fakultas;
+        return (new AbsenExport)->forFakultas($fakultasFilter)->download('absen-wisuda.xlsx');
     }
 
     public function turncate()

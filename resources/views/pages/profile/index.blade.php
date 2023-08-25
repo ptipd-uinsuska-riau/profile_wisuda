@@ -31,6 +31,12 @@
         </div>
 
         <div class="mt-5 flex sm:mt-0 ml-auto">
+            <a data-tw-toggle="modal" data-tw-target="#header-footer-modal-export-absen" href="#" as="a">
+                <x-base.button class="mr-2 w-1/2 sm:w-auto" id="tabulator-print" variant="outline-secondary">
+                    <x-base.lucide class="mr-2 h-4 w-4" icon="FileText" /> Export Absen
+                </x-base.button>
+            </a>
+
             <a data-tw-toggle="modal" data-tw-target="#delete-modal-preview" href="#" as="a">
                 <x-base.button class="mr-2 w-1/2 sm:w-auto" id="tabulator-print" variant="danger">
                     <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" /> Bersihkan Data
@@ -112,9 +118,42 @@
         </div>
     </div>
 
-    {{-- <div class="scrollbar-hidden overflow-x-auto">
-        <div class="mt-5" id="tabulator"></div>
-    </div> --}}
+
+    <x-base.dialog id="header-footer-modal-export-absen">
+        <x-base.dialog.panel>
+            <form action="{{ route('profile.absen') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <x-base.dialog.title>
+                    <h2 class="mr-auto text-base font-medium">
+                        Export Absen
+                    </h2>
+                </x-base.dialog.title>
+                <x-base.dialog.description class="grid grid-cols-12 gap-4 gap-y-3">
+                    <div class="col-span-12">
+                        <x-base.form-label for="modal-form-1">Fakultas</x-base.form-label>
+                        <div class="mt-2">
+                            <select name="filter_fakultas" data-placeholder="Pilih Fakultas" class="tom-select w-full">
+                                <option value="all">Semua Data</option>
+                                @foreach ($fakultas as $item)
+                                <option value="{{ $item->fakultas }}">{{ $item->fakultas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </x-base.dialog.description>
+                <x-base.dialog.footer>
+                    <x-base.button class="mr-1 w-20" data-tw-dismiss="modal" type="button" variant="outline-secondary">
+                        Cancel
+                    </x-base.button>
+                    <x-base.button class="w-20" type="submit" variant="primary">
+                        Send
+                    </x-base.button>
+                </x-base.dialog.footer>
+            </form>
+        </x-base.dialog.panel>
+    </x-base.dialog>
+    <!-- END: Modal Content -->
+
 
     <!-- BEGIN: Modal Content -->
     <x-base.dialog id="header-footer-modal-preview">
@@ -174,6 +213,19 @@
 </div>
 <!-- END: HTML Table Data -->
 @endsection
+
+@once
+@push('vendors')
+@vite('resources/js/vendor/tom-select/index.js')
+@endpush
+@endonce
+
+@once
+@push('scripts')
+@vite('resources/js/components/tom-select/index.js')
+@endpush
+@endonce
+
 
 @once
 @push('scripts')

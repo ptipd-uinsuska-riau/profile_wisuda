@@ -45,10 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('qr', [GenerateQrController::class, 'index'])->name('qr.index');
     Route::get('generate', [GenerateQrController::class, 'generate'])->name('qr.generate');
 
+});
 
+    Route::post('profile/absen', [ProfileController::class, 'absen'])->name('profile.absen');
     Route::get('profile/export', [ProfileController::class, 'export'])->name('profile.export');
     Route::post('profile/import', [ProfileController::class, 'import'])->name('profile.import');
-});
 
 // Route::get('login', [MahasiswaController::class, 'loginView'])->name('login.index');
 
