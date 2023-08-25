@@ -41,7 +41,7 @@
                         class="image-fit zoom-in intro-x block h-8 w-8 scale-110 overflow-hidden rounded-full shadow-lg"
                     >
                         <img
-                            src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-UIN-Suska-Riau-Original-PNG.png.webp"
+                            src=""
                             alt="avatar"
                         />
                     </x-base.menu.button>
@@ -55,12 +55,10 @@
                             </div>
                         </x-base.menu.header>
                         <x-base.menu.divider class="bg-white/[0.08]" />
-                        <x-base.menu.item class="hover:bg-white/5">
-                            <x-base.lucide
-                                class="mr-2 h-4 w-4"
-                                icon="ToggleRight"
-                            /> Logout
-                        </x-base.menu.item>
+
+                         <x-base.menu.item href="{{ route('logout.admin') }}" id="logout-link" class="hover:bg-white/5">
+                             <x-base.lucide class="mr-2 h-4 w-4" icon="ToggleRight" /> Logout
+                         </x-base.menu.item>
                     </x-base.menu.items>
                 </x-base.menu>
                 <!-- END: Account Menu -->
