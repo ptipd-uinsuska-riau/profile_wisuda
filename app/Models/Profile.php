@@ -33,12 +33,4 @@ class Profile extends Model
     ];
 
 
-    // kalau foto kosong, kasih default value dari resource foto
-    public function getFoto()
-    {
-        if (!$this->foto) {
-            return asset('foto/default.jpg');
-        }
-        return asset('foto/' . $this->foto);
-    }
 }
