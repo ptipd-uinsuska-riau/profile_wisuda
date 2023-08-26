@@ -68,7 +68,7 @@
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Program Studi</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="sms">SIF</div>
+                                        <div class="text-lg" id="sms">Nama prodi</div>
                                     </div>
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">

@@ -16,6 +16,7 @@ axios.get("https://api1.iraise.uin-suska.ac.id:8009/client/auth/me", config)
         // Mengubah nilai elemen-elemen HTML berdasarkan data userData
         document.getElementById("nm_pd").textContent = data.nm_pd;
         document.getElementById("id_pd").textContent = data.id_pd;
+        document.getElementById("sms").textContent = data.id_sms;
         document.getElementById("email").textContent = data.email;
         document.getElementById("no_hp").textContent = data.no_hp;
 
