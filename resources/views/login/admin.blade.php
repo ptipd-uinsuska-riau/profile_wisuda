@@ -23,7 +23,7 @@
                             src="{{ Vite::asset('resources/images/logo.svg') }}"
                             alt="Midone Tailwind HTML Admin Template"
                         />
-                        <span class="ml-3 text-lg text-white"> Tinker </span>
+                        <span class="ml-3 text-lg text-white"> Absen Wisuda </span>
                     </a>
                     <div class="my-auto">
                         <img
@@ -49,8 +49,7 @@
                             Sign In
                         </h2>
                         <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
-                            A few more clicks to sign in to your account. Manage all your
-                            e-commerce accounts in one place
+                            A few more clicks to sign in to your account
                         </div>
                         <div class="intro-x mt-8">
                             <form id="login-form">
@@ -58,7 +57,6 @@
                                     class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="email"
                                     type="text"
-                                    value="midone@left4code.com"
                                     placeholder="Email"
                                 />
                                 <div
@@ -69,7 +67,6 @@
                                     class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="password"
                                     type="password"
-                                    value="password"
                                     placeholder="Password"
                                 />
                                 <div

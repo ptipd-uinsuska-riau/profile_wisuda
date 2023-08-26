@@ -37,7 +37,7 @@
                             sign in to your account.
                         </div>
                         <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">
-                            Absensi Wisuda merupakan aplikasi yang digunakan untuk melakukan absensi wisuda secara online.
+                            Absensi Wisuda secara online.
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,6 @@
                                     class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="email"
                                     type="text"
-                                    value="12150312429"
                                     placeholder="NIM"
                                 />
                                 <div
@@ -69,7 +68,6 @@
                                     class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]"
                                     id="password"
                                     type="password"
-                                    value="aditya15"
                                     placeholder="Password"
                                 />
                                 <div

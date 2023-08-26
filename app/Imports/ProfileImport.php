@@ -32,7 +32,8 @@ class ProfileImport implements ToModel
             'periode'   => $row[14],
             'tahun_akademik'  => $row[15],
             'keterangan'=> $row[16],
-            'semester'  => $row[17]
+            'semester'  => $row[17],
+            'judul'    => $row[18],
         ]);
     }
 }

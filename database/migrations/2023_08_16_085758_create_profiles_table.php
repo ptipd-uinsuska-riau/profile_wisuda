@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('semester');
             $table->tinyInteger('hadir')->default(0);
             $table->tinyInteger('status')->default(0);
+            $table->text('judul')->nullable();
             $table->timestamps();
         });
     }

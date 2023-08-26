@@ -169,6 +169,9 @@
     // Bind a function to a Event (the full Laravel class)
     channel.bind('App\\Events\\StatusLiked', function(data) {
         const id = data.id; // Mengambil nilai ID dari data Pusher
+        const defaultAvatarURL = "https://drive.google.com/uc?export=download&id=1F4nlgzlDpCqPgLt0U6vG7mWMhs041kFL";
+        const defaultAvatarAlt = "Logo UIN SUSKA RIAU";
+
         console.log('Received data from Pusher:', data);
         // Lanjutkan dengan pengambilan data dari server berdasarkan ID dan manipulasi DOM
         fetch(`/profile/show-data/${id}`)
@@ -202,13 +205,24 @@
                 // Update Program Studi
                 document.getElementById('prodi').textContent = data.prodi;
 
-                // Update the student's image
+                // Update the student's image, if data.foto is null, use the default value (https://drive.google.com/uc?export=download&id=1F4nlgzlDpCqPgLt0U6vG7mWMhs041kFL)
                 const avatarElement = document.getElementById('avatar');
+                if (data.foto === '0') {
+                avatarElement.src = defaultAvatarURL;
+                avatarElement.alt = defaultAvatarAlt;
+                } else {
                 avatarElement.src = data.foto;
                 avatarElement.alt = data.nama;
+                }
 
                 // Update Judul Penelitian
-                document.getElementById('judul').textContent = 'Judul Penelitian: ' + data.judul_penelitian;
+                const judulElement = document.getElementById('judul');
+                if (data.judul === '0') {
+                judulElement.textContent = '-';
+                } else {
+                judulElement.textContent = data.judul;
+                }
+
 
 
             })

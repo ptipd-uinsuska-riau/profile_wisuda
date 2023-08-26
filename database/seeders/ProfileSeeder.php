@@ -31,6 +31,7 @@ class ProfileSeeder extends Seeder
             'tahun_akademik' => 'JUNI 2024',
             'keterangan' => '2023/2024',
             'semester' => '2022-1',
+            'judul' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sunt corporis impedit, unde consequatur deserunt? Ipsum consectetur sit dolorum et, accusamus, adipisci, dicta quas nihil accusantium magni neque quos minus.',
         ]);
     }
 }

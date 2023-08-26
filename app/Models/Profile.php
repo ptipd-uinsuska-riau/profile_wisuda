@@ -28,7 +28,8 @@ class Profile extends Model
         'keterangan',
         'semester',
         'hadir',
-        'status'
+        'status',
+        'judul'
     ];
 
 
