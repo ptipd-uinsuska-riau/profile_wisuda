@@ -42,8 +42,24 @@
                     <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" /> Bersihkan Data
                 </x-base.button>
             </a>
+
         </div>
     </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-end xl:items-start mt-4">
+        <div class="mt-5 flex sm:mt-0"></div>
+
+        <div class="mt-5 flex sm:mt-0 ml-auto">
+            <form action="{{ route('profile.index') }}" method="GET">
+                <div class="flex items-center">
+                    <input type="text" name="search" placeholder="Cari berdasarkan nama atau nim" value="{{ request('search') }}" class="px-2 py-1 border rounded-md">
+                    <button type="submit" class="ml-2 px-3 py-1 bg-blue-500 text-white rounded-md">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 
     <div class="overflow-x-auto">
         <table class="w-full text-left">

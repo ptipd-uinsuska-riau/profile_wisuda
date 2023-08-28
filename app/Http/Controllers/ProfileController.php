@@ -17,14 +17,25 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $fakultas = Profile::select('fakultas')->distinct()->get();
+        $query = Profile::where('hadir', '1');
 
-        $data = Profile::where('hadir', '1')->simplePaginate(10);
-        return view('pages.profile.index',[
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('nama', 'LIKE', "%$search%")
+                    ->orWhere('nim', 'LIKE', "%$search%");
+            });
+        }
+
+        $data = $query->simplePaginate(10);
+
+        return view('pages.profile.index', [
             'data' => $data,
-            'fakultas' => $fakultas
+            'fakultas' => $fakultas,
+            'search' => $search,
         ]);
     }
 
