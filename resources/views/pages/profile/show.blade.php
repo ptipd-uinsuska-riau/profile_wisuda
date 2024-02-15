@@ -12,16 +12,13 @@
             <div class="col-span-12 row-start-4 mt-6 md:col-span-6 lg:col-span-4 lg:row-start-3 xl:col-span-3 xl:row-start-auto xl:mt-8">
                 <div class="flex items-center h-15 intro-y">
                     <h2 class="mr-5 text-lg font-medium truncate"> </h2>
-                    {{-- <div class="ml-auto truncate text-primary" href=""> --}}
-                    <img class="ml-auto max-w-[30%]" height="10%" src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-UIN-Suska-Riau-Original-PNG.png.webp"> </img>
+                    <img class="ml-auto max-w-[30%]" height="10%" src="{{ asset('logo-uin.png') }}"> </img>
 
-                    {{-- </div> --}}
                 </div>
                 <div class="mt-5 intro-y before:hidden xl:before:block">
                     <div class="p-5 box h-auto">
                         <div class="mt-1">
-                            <img id="avatar" src="https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI" alt="">
-                            {{-- <x-report-donut-chart height="h-[300px]" /> --}}
+                            <img id="avatar" src="{{ asset('logo-uin.png') }}" alt="avatar">
                         </div>
                         {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
                             <div class="flex items-center">
@@ -208,19 +205,19 @@
                 // Update the student's image, if data.foto is null, use the default value (https://drive.google.com/uc?export=download&id=1F4nlgzlDpCqPgLt0U6vG7mWMhs041kFL)
                 const avatarElement = document.getElementById('avatar');
                 if (data.foto === '0') {
-                avatarElement.src = defaultAvatarURL;
-                avatarElement.alt = defaultAvatarAlt;
+                    avatarElement.src = defaultAvatarURL;
+                    avatarElement.alt = defaultAvatarAlt;
                 } else {
-                avatarElement.src = data.foto;
-                avatarElement.alt = data.nama;
+                    avatarElement.src = data.foto;
+                    avatarElement.alt = data.nama;
                 }
 
                 // Update Judul Penelitian
                 const judulElement = document.getElementById('judul');
                 if (data.judul === '0') {
-                judulElement.textContent = '-';
+                    judulElement.textContent = '-';
                 } else {
-                judulElement.textContent = data.judul;
+                    judulElement.textContent = data.judul;
                 }
 
 
