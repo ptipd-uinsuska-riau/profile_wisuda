@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absen;
 use App\Models\Profile;
 use App\Events\StatusLiked;
 use App\Exports\AbsenExport;
@@ -54,10 +55,13 @@ class ProfileController extends Controller
 
     public function import(Request $request)
     {
+        // Excel::import(new ProfileImport, request()->file('file'), null, \Maatwebsite\Excel\Excel::XLSX, ['startRow' => 4]);
 
         Excel::import(new ProfileImport, request()->file('file'));
         return to_route('profile.index');
     }
+
+
 
     public function absen(Request $request)
     {
@@ -68,6 +72,7 @@ class ProfileController extends Controller
     public function turncate()
     {
         Profile::truncate();
+        Absen::truncate();
         return to_route('profile.index');
     }
 

@@ -5,7 +5,7 @@ namespace App\Imports;
 use App\Models\Profile;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-
+// WithHeadingRow
 class ProfileImport implements ToModel, WithHeadingRow
 {
     /**
@@ -16,33 +16,33 @@ class ProfileImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Profile([
-            'no'        => $row[0],
-            'nim'       => $row[1],
-            'nama'      => $row[2],
-            'jk'        => $row[3],
-            'ayah'      => $row[4],
-            'prediket'  => $row[5],
-            'foto'      => $row[6],
-            'fakultas'  => $row[7],
-            'prodi'     => $row[8],
-            'smt'       => $row[9],
-            'tgl_lulus' => $row[10],
-            'ipk'       => $row[11],
-            'tgl_skl'   => $row[12],
-            'tgl_validasi'  => $row[13],
-            'periode'   => $row[14],
-            'tahun_akademik'  => $row[15],
-            'keterangan'=> $row[16],
-            'semester'  => $row[17],
-            'judul'    => $row[18],
+            'no'        => $row['no'],
+            'nim'       => $row['nim'],
+            'nama'      => $row['nama'],
+            'jk'        => $row['jk'],
+            'ayah'      => $row['ayah'],
+            'prediket'  => $row['prediket'],
+            'foto'      => $row['foto'],
+            'fakultas'  => $row['fakultas'],
+            'prodi'     => $row['prodi'],
+            'smt'       => $row['smt'],
+            'tgl_lulus' => $row['tgl_lulus'],
+            'ipk'       => $row['ipk'],
+            'tgl_skl'   => $row['tgl_skl'],
+            'tgl_validasi'  => $row['tgl_validasi'],
+            'periode'   => $row['periode'],
+            'tahun_akademik'  => $row['tahun_akademik'],
+            'keterangan'=> $row['keterangan'],
+            'semester'  => $row['semester'],
+            'judul'    => $row['judul'],
         ]);
     }
 
 
-    public function import(Request $request)
-    {
-        Excel::import(new ProfileImport, request()->file('file'), null, \Maatwebsite\Excel\Excel::XLSX, ['startRow' => 2]);
-        return to_route('profile.index');
-    }
+    // public function import(Request $request)
+    // {
+    //     Excel::import(new ProfileImport, request()->file('file'), null, \Maatwebsite\Excel\Excel::XLSX, ['startRow' => 2]);
+    //     return to_route('profile.index');
+    // }
 
 }
