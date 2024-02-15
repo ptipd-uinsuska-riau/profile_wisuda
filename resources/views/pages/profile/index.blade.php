@@ -81,6 +81,10 @@
                         LOG
                     </th>
                     <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
+                        Hadir
+                    </th>
+
+                    <th class="font-medium px-5 py-3 border-b-2 dark:border-darkmode-300 whitespace-nowrap">
                     </th>
                 </tr>
             </thead>
@@ -105,8 +109,12 @@
                     </td>
                     <td class="px-5 py-3 border-b dark:border-darkmode-300">
                         <div class="text-xs text-slate-500 whitespace-nowrap">Lulus {{ $item->tgl_lulus }}</div>
-                        <div class="text-xs text-slate-500 whitespace-nowrap">Lulus {{ $item->tgl_skl }}</div>
+                        <div class="text-xs text-slate-500 whitespace-nowrap">Skl {{ $item->tgl_skl }}</div>
                         <div class="text-xs text-slate-500 whitespace-nowrap">Validasi {{ $item->tgl_validasi }}1</div>
+                    </td>
+                    <td class="px-5 py-3 border-b dark:border-darkmode-300">
+                        {{-- checkbox --}}
+                        <input type="checkbox" name="hadir" class="border-gray-300 rounded h-5 w-5" data-id="{{ $item->nim }}" {{ $item->hadir == 1 ? 'checked' : '' }} />
 
                     </td>
                     <td class="px-5 py-3 border-b dark:border-darkmode-300">
@@ -114,8 +122,6 @@
                             <div class="mt-2">
                                 <div class="flex items-center">
                                     <input name="status" data-id="{{ $item->id }}" id="status-{{ $item->id }}" {{ $item->status == 1 ? 'checked' : '' }} type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;[type=&#039;radio&#039;]]:checked:bg-primary [&amp;[type=&#039;radio&#039;]]:checked:border-primary [&amp;[type=&#039;radio&#039;]]:checked:border-opacity-10 [&amp;[type=&#039;checkbox&#039;]]:checked:bg-primary [&amp;[type=&#039;checkbox&#039;]]:checked:border-primary [&amp;[type=&#039;checkbox&#039;]]:checked:border-opacity-10 [&amp;:disabled:not(:checked)]:bg-slate-100 [&amp;:disabled:not(:checked)]:cursor-not-allowed [&amp;:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&amp;:disabled:checked]:opacity-70 [&amp;:disabled:checked]:cursor-not-allowed [&amp;:disabled:checked]:dark:bg-darkmode-800/50 w-[38px] h-[24px] p-px rounded-full relative before:w-[20px] before:h-[20px] before:shadow-[1px_1px_3px_rgba(0,0,0,0.25)] before:transition-[margin-left] before:duration-200 before:ease-in-out before:absolute before:inset-y-0 before:my-auto before:rounded-full before:dark:bg-darkmode-600 checked:bg-primary checked:border-primary checked:bg-none before:checked:ml-[14px] before:checked:bg-white w-[38px] h-[24px] p-px rounded-full relative before:w-[20px] before:h-[20px] before:shadow-[1px_1px_3px_rgba(0,0,0,0.25)] before:transition-[margin-left] before:duration-200 before:ease-in-out before:absolute before:inset-y-0 before:my-auto before:rounded-full before:dark:bg-darkmode-600 checked:bg-primary checked:border-primary checked:bg-none before:checked:ml-[14px] before:checked:bg-white" />
-
-
                                 </div>
                             </div>
                         </div>
@@ -327,5 +333,45 @@
     });
 
 </script>
+
+<script>
+    document.querySelectorAll('input[name="hadir"]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            var idPd = this.getAttribute('data-id');
+            var checked = this.checked ? 1 : 0;
+            console.log(idPd, checked);
+            axios.post('/mahasiswa-submit-admin', {
+                    id_pd: idPd
+                    , hadir: checked
+                })
+                .then(function(response) {
+                    console.log(response.data);
+                    // Handle response here, maybe show a success message
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    // Handle error here, maybe show an error message
+                });
+        });
+
+        Toastify({
+            node: $("#basic-non-sticky-notification-content")
+                .clone()
+                .removeClass("hidden")[0]
+            , duration: 3000
+            , newWindow: true
+            , close: true
+            , gravity: "top"
+            , position: "right"
+            , backgroundColor: "white"
+            , stopOnFocus: true
+        , }).showToast();
+
+    });
+
+</script>
+
+
+
 @endpush
 @endonce

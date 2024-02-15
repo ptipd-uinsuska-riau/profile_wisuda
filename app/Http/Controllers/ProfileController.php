@@ -20,7 +20,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $fakultas = Profile::select('fakultas')->distinct()->get();
-        $query = Profile::where('hadir', '1');
+        $query = Profile::where('hadir', '1')->orWhere('hadir', '0');
 
         $search = $request->input('search');
         if ($search) {
@@ -54,6 +54,7 @@ class ProfileController extends Controller
 
     public function import(Request $request)
     {
+
         Excel::import(new ProfileImport, request()->file('file'));
         return to_route('profile.index');
     }
@@ -77,7 +78,8 @@ class ProfileController extends Controller
     public function getData()
     {
          // limit 20 data
-        $data = Profile::where('hadir', '1')->get();
+        // $data = Profile::where('hadir', '1')->get();
+        $data = Profile::get();
 
         //count jumlah data dari $data
         // $count = count($data);
@@ -128,7 +130,8 @@ class ProfileController extends Controller
 
     public function getRealtimeData()
     {
-        $data = Profile::where('hadir', 1)->get();
+        // $data = Profile::where('hadir', 1)->get();
+        $data = Profile::get();
         return response()->json($data);
     }
 

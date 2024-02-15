@@ -19,6 +19,7 @@ class ProfileExport implements FromCollection, WithHeadings, WithChunkReading
     public function collection()
     {
         return Profile::select(
+            'id',
             'nim',
             'nama',
             'jk',
@@ -43,6 +44,7 @@ class ProfileExport implements FromCollection, WithHeadings, WithChunkReading
     public function headings(): array
     {
         return [
+            'No',
             'NIM',
             'Nama',
             'Jenis Kelamin',

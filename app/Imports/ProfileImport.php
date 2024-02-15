@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Profile;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ProfileImport implements ToModel
+class ProfileImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -36,4 +37,12 @@ class ProfileImport implements ToModel
             'judul'    => $row[18],
         ]);
     }
+
+
+    public function import(Request $request)
+    {
+        Excel::import(new ProfileImport, request()->file('file'), null, \Maatwebsite\Excel\Excel::XLSX, ['startRow' => 2]);
+        return to_route('profile.index');
+    }
+
 }

@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Exports;
 
-use App\Models\Absen;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class AbsenExport implements FromQuery
+class AbsenExport implements FromQuery, WithHeadings
 {
     use Exportable;
 
@@ -17,19 +17,28 @@ class AbsenExport implements FromQuery
         return $this;
     }
 
-    /**
-    * @return \Illuminate\Support\Collection
-    * return Absen::query()->where('fakultas', $this->fakultas);
-    */
-
     public function query()
     {
-        return Absen::join('profiles', 'absens.id_pd', '=', 'profiles.nim')
-        ->select('profiles.nim', 'profiles.nama', 'profiles.fakultas', 'profiles.prodi', 'absens.created_at')
-        ->when($this->fakultas !== 'all', function ($query) {
-            return $query->where('profiles.fakultas', $this->fakultas);
-        });
-
+        return DB::table('profiles')
+            ->select('profiles.nim', 'profiles.nama', 'profiles.fakultas', 'profiles.prodi', 'absens.created_at')
+            ->join('absens', function ($join) {
+                $join->on('profiles.nim', '=', 'absens.id_pd')
+                    ->whereRaw('absens.id = (select max(id) from absens where absens.id_pd = profiles.nim)');
+            })
+            ->orderBy('absens.created_at', 'desc')
+            ->when($this->fakultas !== 'all', function ($query) {
+                return $query->where('profiles.fakultas', $this->fakultas);
+            });
     }
 
+    public function headings(): array
+    {
+        return [
+            'NIM',
+            'Nama',
+            'Fakultas',
+            'Program Studi',
+            'Waktu Absen',
+        ];
+    }
 }

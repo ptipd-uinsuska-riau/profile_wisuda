@@ -123,6 +123,42 @@ class MahasiswaController extends Controller
         }
     }
 
+    public function absenProsesByAdmin(Request $request) {
+        //proses absen return json
+        try {
+            $data = $request->all();
+
+            //simpan data absen
+            $absen = new Absen();
+            $absen->id_pd = $data['id_pd'];
+            $absen->save();
+
+            //update kolom hadir tabel profile menjadi 1
+            $profile = Profile::where('nim', $data['id_pd'])->first();
+            if ($profile) {
+                $profile->hadir = 1;
+                $profile->save();
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Anda tidak terdaftar sebagai wisudawan periode ini'
+                ]);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Berhasil absen, terima kasih'
+            ]);
+        } catch (\Exception $e) {
+            // Tangani error di sini, misalnya:
+            // Log::error($e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 
     // Controller di sisi server (backend)
     public function logout(Request $request)
