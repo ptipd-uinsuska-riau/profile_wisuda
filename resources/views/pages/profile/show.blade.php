@@ -19,7 +19,6 @@
                     <div class="p-5 box h-auto">
                         <div class="mt-1">
                             <img id="avatar" src="{{ asset('logo-uin.png') }}" alt="avatar">
-
                         </div>
                         {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
                             <div class="flex items-center">
@@ -167,10 +166,10 @@
     // Bind a function to a Event (the full Laravel class)
     channel.bind('App\\Events\\StatusLiked', function(data) {
         const id = data.id; // Mengambil nilai ID dari data Pusher
-        const defaultAvatarURL = "https://drive.google.com/uc?export=download&id=1F4nlgzlDpCqPgLt0U6vG7mWMhs041kFL";
-        const defaultAvatarAlt = "Logo UIN SUSKA RIAU";
+        const defaultAvatarURL = "https://lh3.googleusercontent.com/d/1y9oVDjYim7meKrBGltFtsT-jklOJ0VGM=w150?authuser=0";
+        const defaultAvatarAlt = "Avatar Mahasiswa UIN SUSKA RIAU";
 
-        console.log('Received data from Pusher:', data);
+        // console.log('Received data from Pusher:', data);
         // Lanjutkan dengan pengambilan data dari server berdasarkan ID dan manipulasi DOM
         fetch(`/profile/show-data/${id}`)
             .then(response => {
@@ -180,11 +179,18 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                // console.log(data);
+                // manipulasi data.foto pake substring
+                // contoh hasil data.foto https://drive.google.com/uc?id=1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI
+                // hasil substring https://lh3.googleusercontent.com/d/1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI
 
+                var data_db = data.foto;
+                var data_foto = data_db.substring(31, 100);
+                var template_url = "https://lh3.googleusercontent.com/d/";
+                var url = template_url + data_foto;
+                // console.log(url);
 
                 // Lanjutkan dengan manipulasi DOM atau tampilan sesuai data yang diterima
-
                 // Update student name
                 document.getElementById('nama').textContent = data.nama;
 
@@ -212,7 +218,7 @@
                     avatarElement.src = defaultAvatarURL;
                     avatarElement.alt = defaultAvatarAlt;
                 } else {
-                    avatarElement.src = data.foto;
+                    avatarElement.src = url;
                     avatarElement.alt = data.nama;
                 }
 
