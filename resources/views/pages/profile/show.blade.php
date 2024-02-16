@@ -19,6 +19,7 @@
                     <div class="p-5 box h-auto">
                         <div class="mt-1">
                             <img id="avatar" src="{{ asset('logo-uin.png') }}" alt="avatar">
+
                         </div>
                         {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
                             <div class="flex items-center">
@@ -70,7 +71,7 @@
                             </div>
                             <div class="flex items-center justify-start mt-2">
                                 <div class="relative ml-0.5 text-xl font-medium" id="ayah">
-                                    ANGGI MAHARANI AGUSTINA
+                                    RANGGA MAHARANI AGUSTINA
                                 </div>
                             </div>
                             {{--
@@ -199,8 +200,11 @@
                 // Update Fakultas
                 document.getElementById('fakultas').textContent = data.fakultas;
 
+                // Update Ayah
+                document.getElementById('fakultas').textContent = data.fakultas;
+
                 // Update Program Studi
-                document.getElementById('prodi').textContent = data.prodi;
+                document.getElementById('ayah').textContent = data.ayah;
 
                 // Update the student's image, if data.foto is null, use the default value (https://drive.google.com/uc?export=download&id=1F4nlgzlDpCqPgLt0U6vG7mWMhs041kFL)
                 const avatarElement = document.getElementById('avatar');
