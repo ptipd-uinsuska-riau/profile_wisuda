@@ -185,7 +185,7 @@
                 // hasil substring https://lh3.googleusercontent.com/d/1Omk8bgFio0Ay1Ym-8zGNJMEbI0_haxOI
 
                 var data_db = data.foto;
-                var data_foto = data_db.substring(31, 100);
+                var data_foto = data_db.split("https://drive.google.com/uc?id=")[1];
                 var template_url = "https://lh3.googleusercontent.com/d/";
                 var url = template_url + data_foto;
                 // console.log(url);
