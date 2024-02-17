@@ -23,7 +23,7 @@
         await helper.delay(1500);
 
         axios
-            .post(`${baseURL}client/auth/login`, {
+            .post(`${baseURL}/client/auth/login`, {
                 username: email,
                 password: password,
             })
