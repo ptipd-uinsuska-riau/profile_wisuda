@@ -1,8 +1,7 @@
 (function () {
     ("use strict");
 
-    const baseURL = "https://api1.iraise.uin-suska.ac.id:8009/client/auth/";
-    // const baseURL = API_URL_CLIENT;
+    const baseURL = "https:absensi-wisuda.uin-suska.ac.id/ipi";
 
     async function login() {
         // Reset state
@@ -10,8 +9,11 @@
         $("#login-form").find(".login__input-error").html("");
 
         // Post form
-        let email = $("#email").val();
+        let email = $("#nim").val();
         let password = $("#password").val();
+
+        // console.log(email, password);
+        // process.exit();
 
         // Loading state
         $("#btn-login").html(
@@ -26,6 +28,7 @@
                 password: password,
             })
             .then((res) => {
+                console.log(res.data);
                 if (res.data.status === 1) {
                     // Jika login berhasil, simpan data pada cookies
                     Cookies.set("token", res.data.data.jwt.token);
