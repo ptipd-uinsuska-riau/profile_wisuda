@@ -31,4 +31,10 @@ axios.get("https://api1-iraise.ptipd.uin-suska.ac.id/client/auth/me", config)
     .catch((error) => {
         // Tangani kesalahan jika ada
         console.error("Error fetching user data:", error);
+
+        // Jika terjadi kesalahan, hapus token dari cookies
+        Cookies.remove("token");
+
+        // Alihkan ke halaman login
+        window.location = "/";
     });

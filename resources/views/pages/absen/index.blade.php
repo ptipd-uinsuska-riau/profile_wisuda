@@ -96,27 +96,27 @@
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Nama Mahasiswa</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="nm_pd">Erno Irwandi</div>
+                                        <div class="text-lg" id="nm_pd">Sedang memuat nama</div>
                                     </div>
-                                    <div class="text-sm" id="id_pd">11653101555</div>
+                                    <div class="text-sm" id="id_pd">Sedang memuat nim</div>
 
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Program Studi</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="sms">Nama prodi</div>
+                                        <div class="text-lg" id="sms">Sedang mendapatkan prodi</div>
                                     </div>
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">Email</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="email">erno.irwandi@uin-suska.ac.id</div>
+                                        <div class="text-lg" id="email">Sedang memuat email anda</div>
                                     </div>
                                 </div>
                                 <div class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-12">
                                     <div class="text-slate-500">No HP</div>
                                     <div class="mt-1.5 flex items-center">
-                                        <div class="text-lg" id="no_hp">082277958348</div>
+                                        <div class="text-lg" id="no_hp">Sedang memuat nomor hp</div>
                                     </div>
                                 </div>
 
