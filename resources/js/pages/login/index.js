@@ -1,7 +1,7 @@
 (function () {
     ("use strict");
 
-    // const baseURL = "https:absensi-wisuda.uin-suska.ac.id/ipi";
+    const baseURL = "https://api1-iraise.ptipd.uin-suska.ac.id/";
 
     async function login() {
         // Reset state

@@ -1,7 +1,7 @@
 @extends('../../layouts/' . $layout)
 
 @section('subhead')
-<title>Dashboard - Midone - Tailwind HTML Admin Template</title>
+<title>Absensi Wisuda</title>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 @endsection
 
@@ -14,7 +14,7 @@
                 @isset($alert)
                 <x-base.alert class="flex items-center mb-6 box dark:border-darkmode-600" variant="primary" dismissible>
                     <span>
-                       {{$alert}}
+                        {{$alert}}
                     </span>
                     <x-base.alert.dismiss-button class="text-white">
                         <x-base.lucide class="w-4 h-4" icon="X" />
