@@ -34,42 +34,23 @@
                     <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
                         Absensi Wisuda
                     </h2>
-                    {{-- jika ada session dari controller tampilkan --}}
-
                     <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
                         Silahkan login menggunakan akun iRaise untuk melanjutkan absensi
                     </div>
-                    {{-- <form method="POST" action="/postlogin"> --}}
-
-                    {{-- @csrf --}}
                     <form id="login-form">
-
-
                         <div class="intro-x mt-8">
-
-
-
                             <x-base.form-input class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]" name="nim" id="nim" type="number" placeholder="NIM" />
-                            <div class="login__input-error mt-2 text-danger" id="error-email"></div>
+                            <div class="login__input-error mt-2 text-danger" id="error-nim"></div>
                             <x-base.form-input class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]" name="password" id="password" type="password" placeholder="Password" />
-                            @if(session()->has('session'))
-                            <div class="mt-5 w-max bg-primary-500 text-black">
-                                {{ session('session') }}
-                            </div>
-                            @endif
-
+                            <div class="login__input-error mt-2 text-danger" id="error-password"></div>
                         </div>
                     </form>
 
-
                     <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
-                        {{-- <button class="bg-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 text-white" type="submit" id="submit"> Login</button> --}}
                         <x-base.button class="w-full px-4 py-3 align-top xl:mr-3 xl:w-32" id="btn-login" variant="primary">
                             Login
                         </x-base.button>
                     </div>
-
-
                 </div>
             </div>
             <!-- END: Login Form -->

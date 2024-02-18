@@ -39,7 +39,7 @@
                     // Jika login gagal, tampilkan pesan kesalahan dari server
                     $("#btn-login").html("Login");
                     $("#password").addClass("border-danger");
-                    $("#error-password").html(res.data.error_msg);
+                    $("#error-password").html(res.data.message);
                 }
             })
             .catch((err) => {
