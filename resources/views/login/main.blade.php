@@ -39,10 +39,14 @@
                     <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
                         Silahkan login menggunakan akun iRaise untuk melanjutkan absensi
                     </div>
-                    <form method="POST" action="/postlogin">
-                        @csrf
+                    {{-- <form method="POST" action="/postlogin"> --}}
+
+                    {{-- @csrf --}}
+                    <form id="login-form">
+
 
                         <div class="intro-x mt-8">
+
 
 
                             <x-base.form-input class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]" name="nim" id="nim" type="number" placeholder="NIM" />
@@ -55,13 +59,15 @@
                             @endif
 
                         </div>
-                        <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
-                            <button class="bg-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 text-white" type="submit" id="submit">
-
-                                Login
-                            </button>
-                        </div>
                     </form>
+
+
+                    <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
+                        {{-- <button class="bg-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 text-white" type="submit" id="submit"> Login</button> --}}
+                        <x-base.button class="w-full px-4 py-3 align-top xl:mr-3 xl:w-32" id="btn-login" variant="primary">
+                            Login
+                        </x-base.button>
+                    </div>
 
 
                 </div>
@@ -74,45 +80,6 @@
 
 @once
 @push('scripts')
-{{-- @vite('resources/js/pages/login/index.js') --}}
-<script>
-    function callAPI(nim) {
-        // Tempatkan panggilan API Anda di sini
-        let nama = document.getElementById("nama");
-        let sms = document.getElementById("sms")
-        let error = document.getElementById("notfound")
-        let submit = document.getElementById("submit")
-
-
-        nama.innerHTML = sms.innerHTML = error.innerHTML = ""
-
-
-        document.getElementById('loading').classList.remove('hidden')
-
-
-        axios.get(`api`)
-            .then(function(response) {
-                document.getElementById('loading').classList.add('hidden')
-                console.log(response.data);
-                // if (response.data.status) {
-                //     const result = response.data.data
-                //     console.log(result)
-                //     nama.innerHTML = result.nama
-                //     sms.innerHTML = '(' + result.program_studi + ')'
-                //     submit.disabled = false
-
-                // } else {
-                //     error.innerHTML = result = response.data.message
-                //     submit.disabled = true
-
-                // }
-            }).catch(function(error) {
-                console.log(error);
-            });
-    }
-    // * * * * * cd /home/tracer.uin-suska.ac.id/public_html/tracer && sh deploy.sh
-
-</script>
-
+@vite('resources/js/pages/login/index.js')
 @endpush
 @endonce

@@ -9,6 +9,7 @@ const config = {
 
 // Melakukan permintaan GET ke API menggunakan axios
 axios.get("https://api1-iraise.ptipd.uin-suska.ac.id/client/auth/me", config)
+
     .then((response) => {
         // Data yang diterima dari API
         const data = response.data.data;
@@ -18,7 +19,8 @@ axios.get("https://api1-iraise.ptipd.uin-suska.ac.id/client/auth/me", config)
         document.getElementById("id_pd").textContent = data.id_pd;
         document.getElementById("sms").textContent = data.id_sms;
         document.getElementById("email").textContent = data.email;
-        document.getElementById("no_hp").textContent = data.no_hp;
+        // jika data.no_hp kosong maka tampilkan data.no_telp
+        document.getElementById("no_hp").textContent = data.no_hp ? data.no_hp : data.no_telp;
 
         // Menambahkan nilai id_pd ke tautan tombol
         const scanButton = document.getElementById("scanButton");

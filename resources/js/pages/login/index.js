@@ -1,7 +1,7 @@
 (function () {
     ("use strict");
 
-    const baseURL = "https://api1-iraise.ptipd.uin-suska.ac.id/";
+    const baseURL = "https://api1-iraise.ptipd.uin-suska.ac.id";
 
     async function login() {
         // Reset state
@@ -12,9 +12,6 @@
         let email = $("#nim").val();
         let password = $("#password").val();
 
-        // console.log(email, password);
-        // process.exit();
-
         // Loading state
         $("#btn-login").html(
             '<i data-loading-icon="oval" data-color="white" class="w-5 h-5 mx-auto"></i>'
@@ -22,32 +19,17 @@
         tailwind.svgLoader();
         await helper.delay(1500);
 
-        // Send request to /api
-        axios.post('/api', { // Specify the route and pass data as the second argument
-            nim: email,
-            password: password
-        })
-            .then(response => {
-                // Handle response here, e.g., show success message, redirect, etc.
-                console.log(response.data);
-            })
-            .catch(error => {
-                // Handle error here, e.g., show error message, log error, etc.
-                console.error(error);
-            });
-
-        console.log('test');
-
-
         axios
             .post(`${baseURL}/client/auth/login`, {
                 username: email,
                 password: password,
             })
             .then((res) => {
-                console.log(res.data);
+                console.log(res);
                 if (res.data.status === 1) {
+                    console.log(res.data.data);
                     // Jika login berhasil, simpan data pada cookies
+
                     Cookies.set("token", res.data.data.jwt.token);
                     Cookies.set("id_pd", res.data.data.data.id_pd);
                     Cookies.set("nm_pd", res.data.data.data.nm_pd);
