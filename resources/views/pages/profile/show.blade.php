@@ -166,7 +166,7 @@
     // Bind a function to a Event (the full Laravel class)
     channel.bind('App\\Events\\StatusLiked', function(data) {
         const id = data.id; // Mengambil nilai ID dari data Pusher
-        const defaultAvatarURL = "https://lh3.googleusercontent.com/d/1y9oVDjYim7meKrBGltFtsT-jklOJ0VGM=w150?authuser=0";
+        const defaultAvatarURL = "{{ asset('logo-uin.png') }}";
         const defaultAvatarAlt = "Avatar Mahasiswa UIN SUSKA RIAU";
 
         // console.log('Received data from Pusher:', data);
