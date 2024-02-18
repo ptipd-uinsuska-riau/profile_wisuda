@@ -29,12 +29,13 @@ class MahasiswaController extends Controller
 
     public function absen(Request $request) {
         $alert = $request->input('alert');
-
         // get data asben by id_pd & created_at = now
         $date_time = date('Y-m-d');
 
         //ambil id_pd dari cookies
-        $id_pd = $_COOKIE['id_pd'];
+        // $id_pd = $_COOKIE['id_pd'];
+        $id_pd = $request->cookie('id_pd');
+
         // dd($id_pd);
 
         $absen = Absen::where('id_pd', $id_pd)->whereDate('created_at', $date_time)->first();

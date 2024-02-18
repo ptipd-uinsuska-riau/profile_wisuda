@@ -34,40 +34,36 @@
                     <h2 class="intro-x text-center text-2xl font-bold xl:text-left xl:text-3xl">
                         Absensi Wisuda
                     </h2>
+                    {{-- jika ada session dari controller tampilkan --}}
+
                     <div class="intro-x mt-2 text-center text-slate-400 xl:hidden">
                         Silahkan login menggunakan akun iRaise untuk melanjutkan absensi
                     </div>
-                    <div class="intro-x mt-8">
-                        <form id="login-form">
-                            <x-base.form-input class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]" id="nim" type="number" placeholder="NIM" />
+                    <form method="POST" action="/postlogin">
+                        @csrf
+
+                        <div class="intro-x mt-8">
+
+
+                            <x-base.form-input class="intro-x login__input block min-w-full px-4 py-3 xl:min-w-[350px]" name="nim" id="nim" type="number" placeholder="NIM" />
                             <div class="login__input-error mt-2 text-danger" id="error-email"></div>
-                            <x-base.form-input class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]" id="password" type="password" placeholder="Password" />
-                            <div class="login__input-error mt-2 text-danger" id="error-password"></div>
-                        </form>
-                    </div>
-                    <div class="intro-x mt-4 flex text-xs text-slate-600 dark:text-slate-500 sm:text-sm">
-                        <div class="mr-auto flex items-center">
-                            <x-base.form-check.input class="mr-2 border" id="remember-me" type="checkbox" />
-                            <label class="cursor-pointer select-none" for="remember-me">
-                                Remember me
-                            </label>
+                            <x-base.form-input class="intro-x login__input mt-4 block min-w-full px-4 py-3 xl:min-w-[350px]" name="password" id="password" type="password" placeholder="Password" />
+                            @if(session()->has('session'))
+                            <div class="mt-5 w-max bg-primary-500 text-black">
+                                {{ session('session') }}
+                            </div>
+                            @endif
+
                         </div>
-                    </div>
-                    <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
-                        <x-base.button class="w-full px-4 py-3 align-top xl:mr-3 xl:w-32" id="btn-login" variant="primary">
-                            Login
-                        </x-base.button>
-                    </div>
-                    <div class="intro-x mt-10 text-center text-slate-600 dark:text-slate-500 xl:mt-24 xl:text-left">
-                        By signin up, you agree to our
-                        <a class="text-primary dark:text-slate-200" href="">
-                            Terms and Conditions
-                        </a>
-                        &
-                        <a class="text-primary dark:text-slate-200" href="">
-                            Privacy Policy
-                        </a>
-                    </div>
+                        <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left">
+                            <button class="bg-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32 text-white" type="submit" id="submit">
+
+                                Login
+                            </button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
             <!-- END: Login Form -->
@@ -78,6 +74,45 @@
 
 @once
 @push('scripts')
-@vite('resources/js/pages/login/index.js')
+{{-- @vite('resources/js/pages/login/index.js') --}}
+<script>
+    function callAPI(nim) {
+        // Tempatkan panggilan API Anda di sini
+        let nama = document.getElementById("nama");
+        let sms = document.getElementById("sms")
+        let error = document.getElementById("notfound")
+        let submit = document.getElementById("submit")
+
+
+        nama.innerHTML = sms.innerHTML = error.innerHTML = ""
+
+
+        document.getElementById('loading').classList.remove('hidden')
+
+
+        axios.get(`api`)
+            .then(function(response) {
+                document.getElementById('loading').classList.add('hidden')
+                console.log(response.data);
+                // if (response.data.status) {
+                //     const result = response.data.data
+                //     console.log(result)
+                //     nama.innerHTML = result.nama
+                //     sms.innerHTML = '(' + result.program_studi + ')'
+                //     submit.disabled = false
+
+                // } else {
+                //     error.innerHTML = result = response.data.message
+                //     submit.disabled = true
+
+                // }
+            }).catch(function(error) {
+                console.log(error);
+            });
+    }
+    // * * * * * cd /home/tracer.uin-suska.ac.id/public_html/tracer && sh deploy.sh
+
+</script>
+
 @endpush
 @endonce

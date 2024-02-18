@@ -1,7 +1,7 @@
 (function () {
     ("use strict");
 
-    const baseURL = "https:absensi-wisuda.uin-suska.ac.id/ipi";
+    // const baseURL = "https:absensi-wisuda.uin-suska.ac.id/ipi";
 
     async function login() {
         // Reset state
@@ -22,67 +22,84 @@
         tailwind.svgLoader();
         await helper.delay(1500);
 
-        axios
-            .post(`${baseURL}/client/auth/login`, {
-                username: email,
-                password: password,
+        // Send request to /api
+        axios.post('/api', { // Specify the route and pass data as the second argument
+            nim: email,
+            password: password
+        })
+            .then(response => {
+                // Handle response here, e.g., show success message, redirect, etc.
+                console.log(response.data);
             })
-            .then((res) => {
-                console.log(res.data);
-                if (res.data.status === 1) {
-                    // Jika login berhasil, simpan data pada cookies
-                    Cookies.set("token", res.data.data.jwt.token);
-                    Cookies.set("id_pd", res.data.data.data.id_pd);
-                    Cookies.set("nm_pd", res.data.data.data.nm_pd);
-
-                    window.location = "/mahasiswa-absen";
-                } else {
-                    // Jika login gagal, tampilkan pesan kesalahan dari server
-                    $("#btn-login").html("Login");
-                    $("#password").addClass("border-danger");
-                    $("#error-password").html(res.data.error_msg);
-                }
-            })
-            .catch((err) => {
-                $("#btn-login").html("Login");
-                if (
-                    err.response &&
-                    err.response.data &&
-                    err.response.data.message
-                ) {
-                    if (
-                        err.response.data.message !==
-                        "Wrong username or password."
-                    ) {
-                        for (const [key, val] of Object.entries(
-                            err.response.data.errors
-                        )) {
-                            $(`#${key}`).addClass("border-danger");
-                            $(`#error-${key}`).html(val);
-                        }
-                    } else {
-                        $(`#password`).addClass("border-danger");
-                        $(`#error-password`).html(err.response.data.message);
-                    }
-                } else {
-                    // Penanganan kesalahan lain yang mungkin terjadi
-                    console.error(err);
-
-                    //kirim pop up error ke view
-                    Toastify({
-                        node: $("#basic-non-sticky-notification-content")
-                            .clone()
-                            .removeClass("hidden")[0],
-                        duration: 3000,
-                        newWindow: true,
-                        close: true,
-                        gravity: "top",
-                        position: "right",
-                        backgroundColor: "white",
-                        stopOnFocus: true,
-                    }).showToast();
-                }
+            .catch(error => {
+                // Handle error here, e.g., show error message, log error, etc.
+                console.error(error);
             });
+
+        console.log('test');
+
+
+        // axios
+        //     .post(`${baseURL}/client/auth/login`, {
+        //         username: email,
+        //         password: password,
+        //     })
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         if (res.data.status === 1) {
+        //             // Jika login berhasil, simpan data pada cookies
+        //             Cookies.set("token", res.data.data.jwt.token);
+        //             Cookies.set("id_pd", res.data.data.data.id_pd);
+        //             Cookies.set("nm_pd", res.data.data.data.nm_pd);
+
+        //             window.location = "/mahasiswa-absen";
+        //         } else {
+        //             // Jika login gagal, tampilkan pesan kesalahan dari server
+        //             $("#btn-login").html("Login");
+        //             $("#password").addClass("border-danger");
+        //             $("#error-password").html(res.data.error_msg);
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         $("#btn-login").html("Login");
+        //         if (
+        //             err.response &&
+        //             err.response.data &&
+        //             err.response.data.message
+        //         ) {
+        //             if (
+        //                 err.response.data.message !==
+        //                 "Wrong username or password."
+        //             ) {
+        //                 for (const [key, val] of Object.entries(
+        //                     err.response.data.errors
+        //                 )) {
+        //                     $(`#${key}`).addClass("border-danger");
+        //                     $(`#error-${key}`).html(val);
+        //                 }
+        //             } else {
+        //                 $(`#password`).addClass("border-danger");
+        //                 $(`#error-password`).html(err.response.data.message);
+        //             }
+        //         } else {
+        //             // Penanganan kesalahan lain yang mungkin terjadi
+        //             console.error(err);
+
+        //             //kirim pop up error ke view
+        //             Toastify({
+        //                 node: $("#basic-non-sticky-notification-content")
+        //                     .clone()
+        //                     .removeClass("hidden")[0],
+        //                 duration: 3000,
+        //                 newWindow: true,
+        //                 close: true,
+        //                 gravity: "top",
+        //                 position: "right",
+        //                 backgroundColor: "white",
+        //                 stopOnFocus: true,
+        //             }).showToast();
+        //         }
+        //     });
     }
 
     $("#login-form").on("keyup", function (e) {

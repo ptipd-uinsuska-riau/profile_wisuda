@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -24,10 +25,13 @@ Route::get('/', function () {
     return to_route('login.index');
 });
 
+Route::post('/api', [ApiController::class, 'Login'])->name('api.login');
+route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
 Route::get('/login', [MahasiswaController::class, 'loginView'])->name('login.index');
 Route::post('/login', [MahasiswaController::class, 'login'])->name('login.check');
 Route::get('/logout', [MahasiswaController::class, 'logout'])->name('logout.admin');
 Route::get('/mahasiswa-absen',[MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
+Route::match(['get', 'post'], '/mahasiswa-absen', [MahasiswaController::class, 'absen'])->name('mahasiswa.absen');
 Route::get('/mahasiswa-scan',[MahasiswaController::class, 'scan'])->name('mahasiswa.scan');
 Route::post('/mahasiswa-submit',[MahasiswaController::class, 'absenProses'])->name('mahasiswa.submit');
 Route::post('/mahasiswa-submit-admin', [MahasiswaController::class, 'absenProsesByAdmin'])->name('mahasiswa.submit-admin');
