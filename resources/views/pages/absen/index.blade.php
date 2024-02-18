@@ -7,7 +7,7 @@
 
 @section('subcontent')
 <div class="relative">
-    <div class="grid grid-cols-12 gap-6">
+    <div class="grid grid-cols-12 gap-6 mb-4">
         <div class="z-20 col-span-12 xl:col-span-9 2xl:col-span-9">
             <div class="mt-6 -mb-6 intro-y">
 
@@ -25,7 +25,26 @@
             </div>
         </div>
     </div>
-    <div class="mt-5 top-0 right-0 z-30 grid w-full h-full grid-cols-12 gap-6 pb-6 -mt-8 xl:absolute xl:z-auto xl:mt-0 xl:pb-0">
+
+    <div class="grid grid-cols-12 gap-6 mb-4">
+        <div class="z-20 col-span-12 xl:col-span-9 2xl:col-span-9">
+            <div class="-mb-6 intro-y">
+                @isset($alert)
+                <x-base.alert class="flex items-center mb-6 box dark:border-darkmode-600" variant="default" dismissible>
+                    <span>
+                        silahkan klik icon kamera dibawan ini untuk mulai melakukan absen, <p class="text-danger">wajib memberikan izin akse kamera,</p> jika kamera tidak muncul silahkan refresh halaman ini atau ganti ke browser lain.
+                    </span>
+                    <x-base.alert.dismiss-button class="text-white">
+                        <x-base.lucide class="w-4 h-4" icon="X" />
+                    </x-base.alert.dismiss-button>
+                </x-base.alert>
+                @endif
+
+            </div>
+        </div>
+    </div>
+
+    <div class="top-0 right-0 z-30 grid w-full h-full grid-cols-12 gap-6 pb-6 -mt-8 xl:absolute xl:z-auto xl:mt-0 xl:pb-0">
         <div class="z-30 col-span-12 xl:col-span-3 xl:col-start-10 xl:pb-16">
             <div class="flex flex-col h-full">
                 <div class="p-5 mt-6 box intro-x bg-primary">
@@ -33,7 +52,7 @@
                         <div class="mr-auto">
                             <div class="flex items-center leading-3 text-white text-opacity-70 dark:text-slate-300">
                                 Rekam Absensi
-                                <x-base.tippy as="div" content="Total value of your sales: $158.409.416">
+                                <x-base.tippy as="div" content="silahkan scan qr code yang di sediakan panitia">
                                     <x-base.lucide class="ml-1.5 h-4 w-4" icon="AlertCircle" />
                                 </x-base.tippy>
                             </div>
@@ -46,6 +65,23 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="z-20 col-span-12 xl:col-span-9 2xl:col-span-9 mt-4">
+                    <div class="-mb-6 intro-y">
+                        @isset($alert)
+                        <x-base.alert class="flex items-center mb-6 box dark:border-darkmode-600" variant="primary" dismissible>
+                            <span>
+                                Jika data dibawah ini bukan merupakan milik anda silahkan login ulang.
+                            </span>
+                            <x-base.alert.dismiss-button class="text-white">
+                                <x-base.lucide class="w-4 h-4" icon="X" />
+                            </x-base.alert.dismiss-button>
+                        </x-base.alert>
+                        @endif
+
+                    </div>
+                </div>
+
                 <div class="intro-x xl:min-h-0">
                     <x-base.tab.group class="max-h-full mt-5 box xl:overflow-y-auto">
                         <div class="top-0 px-5 pt-5 pb-6 xl:sticky">
@@ -88,7 +124,7 @@
                                     <x-base.button class="relative justify-start col-span-12 mb-2 border-dashed border-slate-300 dark:border-darkmode-300" variant="outline-secondary">
                                         <span class="mr-5 truncate"> Logout </span>
                                         <span class="absolute right-0 top-0 bottom-0 my-auto ml-auto mr-0.5 flex h-8 w-8 items-center justify-center">
-                                            <x-base.lucide class="w-4 h-4" icon="ArrowRight" />
+                                            <x-base.lucide class="w-4 h-4" icon="PowerOff" />
                                         </span>
                                     </x-base.button>
                                 </a>

@@ -53,7 +53,7 @@ class MahasiswaController extends Controller
         } else {
             //jika tidak ada data absen, maka tampilkan jam = belum ada data
             return view('pages.absen.index', [
-                'layout' => 'top-menu',
+                'layout' => 'no-menu',
                 'alert' => $alert ? $alert : 'Selamat datang di aplikasi absensi wisuda, Silahkan lakukan scan barcode untuk merekam absensi.',
                 'jam' => 'belum ada data'
             ]);

@@ -13,6 +13,7 @@
         top: 0 !important;
         left: 0 !important;
     }
+
 </style>
 @endsection
 
@@ -50,19 +51,19 @@
                 {{-- hidden --}}
 
                 <div class="intro-x mt-5 text-center xl:mt-8 xl:text-left bg-white hidden">
-                    <button type="submit" id="btn-absen" class="bg-gray-400 transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Absen</button>
+                    <button type="submit" id="btn-absen" class=" transition duration-200 border shadow-sm inline-flex items-center justify-center rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-full px-4 py-3 align-top xl:mr-3 xl:w-32">Absen</button>
                 </div>
             </form>
         </div>
 
         <div class="h-screen w-screen fixed top-0 left-0">
-            <div class="flex absolute bottom-0 left-0">
+            <div class="flex absolute bottom-10 left-1/2 transform -translate-x-1/2">
                 <div class="p-3 text-center text-white">
                     <div class="mt-5 text-xl font-medium lg:text-3xl">Absen Wisuda</div>
                     <div class="mt-3 text-lg">Arahkan Kamera Ke QR Code yang disediakan panitia</div>
                     <a href="{{ route('mahasiswa.absen') }}">
                         <x-base.button class="mt-10 border-white px-4 py-3 text-white dark:border-darkmode-400 dark:text-slate-200">
-                            Back to Home
+                            Kembali ke Profil
                         </x-base.button>
                     </a>
                 </div>
