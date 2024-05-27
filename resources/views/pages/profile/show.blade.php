@@ -20,23 +20,6 @@
                         <div class="mt-1">
                             <img id="avatar" src="{{ asset('logo-uin.png') }}" alt="avatar">
                         </div>
-                        {{-- <div class="mx-auto mt-8 w-52 sm:w-auto">
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 mr-3 rounded-full bg-primary"></div>
-                                <span class="truncate">17 - 30 Years old</span>
-                                <span class="ml-auto font-medium">62%</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 mr-3 rounded-full bg-pending"></div>
-                                <span class="truncate">31 - 50 Years old</span>
-                                <span class="ml-auto font-medium">33%</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 mr-3 rounded-full bg-warning"></div>
-                                <span class="truncate">&gt;= 50 Years old</span>
-                                <span class="ml-auto font-medium">10%</span>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -49,10 +32,10 @@
 
                     <a class="ml-auto truncate text-primary" href=""> </a>
                 </div>
+                {{-- old --}}
                 <div class="mt-5 intro-y">
                     <div class="grid grid-cols-12 box">
                         <div class="flex flex-col justify-center col-span-12 px-8 py-12 lg:col-span-4">
-                            {{-- <x-base.lucide class="w-10 h-10 text-pending" icon="PieChart" /> --}}
                             <div class="flex items-center justify-start mt-2 text-slate-600 dark:text-slate-300">
                                 Nama
                             </div>
@@ -73,13 +56,6 @@
                                     RANGGA MAHARANI AGUSTINA
                                 </div>
                             </div>
-                            {{--
-                            <x-base.button class="relative justify-start mt-12 rounded-full" variant="outline-secondary">
-                                Download Reports
-                                <span class="absolute right-0 top-0 bottom-0 my-auto ml-auto mr-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
-                                    <x-base.lucide class="w-4 h-4" icon="ArrowRight" />
-                                </span>
-                            </x-base.button> --}}
                         </div>
                         <div class="col-span-12 p-8 border-t border-dashed border-slate-200 dark:border-darkmode-300 lg:col-span-8 lg:border-t-0 lg:border-l">
                             <x-base.tab.group>
@@ -206,8 +182,8 @@
                 // Update Fakultas
                 document.getElementById('fakultas').textContent = data.fakultas;
 
-                // Update Ayah
-                document.getElementById('fakultas').textContent = data.fakultas;
+                // Update prodi
+                document.getElementById('prodi').textContent = data.prodi;
 
                 // Update Program Studi
                 document.getElementById('ayah').textContent = data.ayah;
